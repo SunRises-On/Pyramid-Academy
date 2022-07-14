@@ -27,7 +27,7 @@ public class Main {
                 System.out.println("Would you like to play again? (y or n)");
                 char c = sc.next().charAt(0);
                 if(c == 'y'){
-                    //call main in user wants a new game
+                    //call main if user wants a new game
                     main(null);
                 }
                 else{
