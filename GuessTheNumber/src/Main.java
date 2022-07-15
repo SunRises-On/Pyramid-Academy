@@ -15,8 +15,10 @@ public class Main {
         System.out.println("Well, "+ name +", I am thinking of a number between 1 and 20");
         System.out.println("Take a guess");
 
-
-        int random = (int) ((Math.random() * (max -min)) + min);
+        Random rand = new Random();
+        //rand.nextInt(10) will have a range of 0-9
+        // So max-min to find the range of numbers then + 1 and min.
+        int random = rand.nextInt((max - min) + 1) + min;
         int guess = 0;
         // loop until user guess random number
         while(true){
