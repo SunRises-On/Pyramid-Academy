@@ -23,7 +23,15 @@ public class main {
             System.out.println(s);
         }
         // scanner get user input
-        int choice = sc.nextInt();
+        int choice = 0;
+
+        //Added try catch block for Project 3
+        try{
+            choice = sc.nextInt();
+        }catch (Exception e){
+            System.out.println("Wrong user input. Only numbers allowed.");
+        }
+
         if(choice == 1){
             for(String s: optionOne){
                 System.out.println(s);
