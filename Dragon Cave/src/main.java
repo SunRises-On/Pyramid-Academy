@@ -26,11 +26,16 @@ public class main {
         int choice = 0;
 
         //Added try catch block for Project 3
-        try{
-            choice = sc.nextInt();
-        }catch (Exception e){
-            System.out.println("Wrong user input. Only numbers allowed.");
+        while(!sc.hasNextInt()) {  //if scanner doesn't have int repeat
+            try {
+                choice = sc.nextInt();
+            } catch (Exception e) {
+                sc.next(); //advance past bad input
+                System.out.println("Error! Input only numbers.");
+            }
         }
+        choice = sc.nextInt(); //scanner has int next proceed
+
 
         if(choice == 1){
             for(String s: optionOne){
@@ -46,4 +51,5 @@ public class main {
             System.out.println("Wrong choice, start over.");
         }
     }
+
 }
