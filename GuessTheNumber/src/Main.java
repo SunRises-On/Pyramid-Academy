@@ -51,7 +51,7 @@ public class Main {
                     sc.next();
                     System.out.println("Error! Input only letters!");
                 }
-                
+
                 if(c == 'y'){
                     //call main if user wants a new game
                     main(null);
@@ -69,6 +69,11 @@ public class Main {
             else if (choice < random){
                 System.out.println("Your guess is too low.");
                 System.out.println("Take a guess");
+            }
+
+            if(guess ==6){
+                System.out.println("Game over. Only 6 guesses allowed");
+                break;
             }
         }
     }
