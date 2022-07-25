@@ -15,11 +15,10 @@ public class main {
             ,"A large dragon jumps out in front of you! He opens his jaws and ..."
             ,"Gobbles you down in one bite!"};
     static final String[] optionTwo = {"Success! The dragon is friendly and shares his treasure!"};
+
     public static void main (String [] args){
 
-
         Scanner sc = new Scanner(System.in);
-
 
         for(String s : script){
             System.out.println(s);
