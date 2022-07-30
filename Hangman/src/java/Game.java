@@ -30,7 +30,7 @@ public class Game{
             printHangman(player.getMiss());
             //check if game is over if we have lost the game
             isComplete = gameOver(player);
-            System.out.println("Game not over");
+
             System.out.println();
             //print missing letters
             printMissingLetters(player);
@@ -56,7 +56,7 @@ public class Game{
 
         /*Game is over if player misses equals max number of misses,
           or the word has been guessed. */
-        //if (condition)  is false return false
+        //if (condition)  is true, return true
         return (player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length());
     }
     //Print missing letters from Object player
@@ -226,12 +226,11 @@ public class Game{
     public Boolean isMissRepeated(char l, Player player){
         String str = ""+l;
         str = str.toLowerCase();
-        //iterate through arraylist and check if letter has been guessed
-        ListIterator<String> iterator = player.getPlayerMisses().listIterator();
-        while (iterator.hasNext()){
+
+        for(String element : player.getPlayerMisses()){
             //== tests for reference equality (whether they are the same object
             //.equals() tests for value equality
-            if(iterator.next().equals(str)){
+            if(element.equals(str)){
                 return true;
             }
         }
@@ -240,12 +239,8 @@ public class Game{
     public Boolean isHitRepeated(char l, Player player){
         String str = ""+l;
         str = str.toLowerCase();
-        //iterate through arraylist and check if letter has been guessed
-        ListIterator<String> iterator = player.getSecretWord().listIterator();
-        while (iterator.hasNext()){
-            //== tests for reference equality (whether they are the same object
-            //.equals() tests for value equality
-            if(iterator.next().equals(str)){
+        for(String element : player.getSecretWord() ){
+            if(element.equals(str)){
                 return true;
             }
         }
@@ -253,13 +248,13 @@ public class Game{
     }
     //Check if guess is a hit
     public Boolean correctGuess (String s, Player player){
-        ListIterator<String> iterator = player.hangmanArray.listIterator();
-        while(iterator.hasNext()){
-            //correct guess
-            if(iterator.next().equals(s)){
+
+        for(String element: player.getHangmanArray() ){
+            if(element.equals(s)){
                 return true;
             }
         }
+
         return false;
     }
     //Update Player methods for the miss guess.
@@ -281,7 +276,7 @@ public class Game{
         }
     }
     //Check if the player won or loss.
-    // if (condition)  is false return false
+    // if (condition)  is true return false.
     public Boolean wonOrLoss(Player player){
         return !(player.playerMisses.size() == player.getMaxNumberMisses());
     }

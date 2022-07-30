@@ -14,9 +14,6 @@ public class Player{
     //constructor
     public Player(String word){
          HangmanWord = word.toLowerCase();
-         playerMisses.clear();
-         secretWord.clear();
-         hangmanArray.clear();
          hit = 0;
          miss = 0;
          //add an underscore to secretWord for each letter of "word".
