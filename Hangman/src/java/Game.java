@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ListIterator;
 import java.util.Scanner;
@@ -80,100 +81,37 @@ public class Game{
     //Depending on the number of misses
     //print different hangman's.
     public void printHangman(int miss){
-        switch (miss){
-            case 0:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 1:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 2:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println();
-                System.out.println("     |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 3:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 4:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println("\\|   |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 5:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println("\\|/  |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println();
-                System.out.println("    ===");
-                break;
-            case 6:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println("\\|/  |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println("/");
-                System.out.println("    ===");
-                break;
-            case 7:
-                System.out.println(" +---+");
-                System.out.println();
-                System.out.println(" O   |");
-                System.out.println();
-                System.out.println("\\|/  |");
-                System.out.println();
-                System.out.println(" |   |");
-                System.out.println("/ \\");
-                System.out.println("    ===");
-                break;
-            default:
-                System.out.println("Error in printHangman()");
-
+        ArrayList<String> screen = new ArrayList<>();
+        for(int i = 0 ; i <= 9 ; ++i){
+            screen.add("");
         }
 
+        screen.set(0," +---+");//index 0
+        //index 2
+        String line2 = miss > 0 ? (" O   |") :("     |");
+        screen.set(2,line2);
+
+        if(miss<2){
+            screen.set(4,"     |");
+        }else if (miss <4) {
+            screen.set(4," |   |");
+        }else if (miss == 4){
+            screen.set(4, "\\|  |");
+        }else{
+            screen.set(4,"\\|/  |");
+        }
+        String index6 = miss < 3 ?"     |" :" |   |" ;
+        screen.set(6,index6);
+
+        if(miss == 6){
+            screen.set(7,"/");
+        }else if (miss == 7){
+            screen.set(7,"/ \\");
+        }
+        screen.set(8,"    ===");
+        for(String str : screen){
+            System.out.println(str);
+        }
     }
     //Handle player guess
     public void playerGuess( Player player, Scanner sc) {
