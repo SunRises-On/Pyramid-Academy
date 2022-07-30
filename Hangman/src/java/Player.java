@@ -3,16 +3,16 @@ import java.util.ArrayList;
 public class Player{
     public String HangmanWord; //find word
     ArrayList<String> secretWord = new ArrayList<>();
-    public char[] correctGuesses;//array to keep track of guess
+
     //Arraylist to keep track of misses
     ArrayList<String> playerMisses = new ArrayList<>();
-   public static int maxNumberMisses = 7; // max number of misses
+   public static final int maxNumberMisses = 7; // max number of misses
     public int guesses; //number of guesses
     public int hit; //number of hits
     public int miss; // number of misses;
     //constructor
     public Player(String word){
-         word = HangmanWord;
+         HangmanWord = word;
          guesses = 0;
          hit = 0;
          miss = 0;
@@ -21,10 +21,21 @@ public class Player{
              secretWord.add("_");
          }
     }
-
-
-
-
+    private void setGuesses(int setGuesses){
+        guesses = setGuesses;
+    }
+    private void setHit(int setHit){
+        hit = setHit;
+    }
+    private void setMiss(int setMiss){
+        miss = setMiss;
+    }
+    private void setSecretWord(ArrayList<String> setSecretWord){
+        secretWord = setSecretWord;
+    }
+    private void setPlayerMisses(ArrayList<String> setPlayerMisses){
+        playerMisses = setPlayerMisses;
+    }
 
     //get methods
     public int getGuesses() {
@@ -34,9 +45,15 @@ public class Player{
         return maxNumberMisses;
     }
     public int getHit(){
-        return getHit();
+        return hit;
     }
     public int getMiss(){
-        return getMiss();
+        return miss;
+    }
+    public ArrayList<String> getSecretWord(){
+        return secretWord;
+    }
+    public ArrayList<String> getPlayerMisses(){
+        return playerMisses;
     }
 }

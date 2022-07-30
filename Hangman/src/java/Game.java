@@ -20,26 +20,24 @@ public class Game{
     //Play the game
     public void play(Player player){
         Boolean isComplete = false;
-
+        Boolean playerWon = false;
         //While game is not over loop
         while(!isComplete){
-            //Call printHangman
-
-            //check if game is over
-            isComplete = gameOver(player);
-            //Game isn't over print...
+            //Call print Hangman
             printHangman(player.getMiss());
-
+            //check if game is over if we have lost the game
+            isComplete = gameOver(player);
             System.out.println("");
             //print missing letters
-            missingLetters(player);
-            System.out.println("");
-            //print spaces or letters of Hangman word
-            spaceOrLetters(player);
+            printMissingLetters(player);
+            //print progress of Hangman word
+            printProgress(player);
 
-
+            //check if completed the game
+            isComplete = gameOver(player);
         }
-        //Game is over
+        //Game is over, check if player won;
+        playerWon = wonOrLoss(player);
 
         //if game is over
     }
@@ -55,15 +53,18 @@ public class Game{
         return false;
     }
     //Print missing letters from Object player
-    public void missingLetters(Player player){
+    public void printMissingLetters(Player player){
         //replace brackets and commas with ""
         String str = Arrays.toString(player.playerMisses.toArray()).replace("[","").replace(",","").replace("]","");
-
+        System.out.println("");
         System.out.println("Missed letters: "+ str);
     }
-    //Print spaces or letters
-    public void spaceOrLetters(Player player){
-
+    //Print progress on guessing secret word.
+    public void printProgress(Player player){
+        //replace brackets and commas with ""
+        String str = Arrays.toString(player.secretWord.toArray()).replace("[","").replace(",","").replace("]","");
+        System.out.println("");
+        System.out.println(str);
     }
     //Depending on the number of misses
     //print different hangman's.
@@ -162,6 +163,13 @@ public class Game{
 
         }
 
+    }
+    //Check if the player won or loss
+    public boolean wonOrLoss(Player player){
+        if(player.playerMisses.size() == player.getMaxNumberMisses()){
+            return false;
+        }
+        return true;
     }
 
 
