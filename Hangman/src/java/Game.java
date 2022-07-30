@@ -10,10 +10,11 @@ public class Game{
         System.out.println("We are playing Hangman.");
 
 
-       //// Scan scanFile = new Scan();
+        Scan scanFile = new Scan();
         //get hangman new word
-    /////    String word = scanFile.scanWordFile();
-        String word = "apple";
+        String word = scanFile.scanWordFile();
+        System.out.println("Answer = "+word);
+      //  String word = "apple";
         Player newGame = new Player(word);
 
         //game is initialized go to rounds....
@@ -44,7 +45,10 @@ public class Game{
 
         //Game is over, check if player won;
         playerWon = wonOrLoss(player);
-
+        //if player didn't win print hangman
+        if(!playerWon) {
+            printHangman(player.getMiss());
+        }
         //Print the winning or losing message
         winningMessage(playerWon, player);
 
@@ -137,7 +141,7 @@ public class Game{
                 System.out.println();
                 System.out.println(" O   |");
                 System.out.println();
-                System.out.println("\\|/   |");
+                System.out.println("\\|/  |");
                 System.out.println();
                 System.out.println(" |   |");
                 System.out.println();
@@ -148,7 +152,7 @@ public class Game{
                 System.out.println();
                 System.out.println(" O   |");
                 System.out.println();
-                System.out.println("\\|/   |");
+                System.out.println("\\|/  |");
                 System.out.println();
                 System.out.println(" |   |");
                 System.out.println("/");
@@ -159,7 +163,7 @@ public class Game{
                 System.out.println();
                 System.out.println(" O   |");
                 System.out.println();
-                System.out.println("\\|/   |");
+                System.out.println("\\|/  |");
                 System.out.println();
                 System.out.println(" |   |");
                 System.out.println("/ \\");
