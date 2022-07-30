@@ -10,7 +10,6 @@ public class Game{
 
         System.out.println("We are playing Hangman.");
 
-
         Scan scanFile = new Scan();
         //get hangman new word
         String word = scanFile.scanWordFile();
@@ -56,12 +55,8 @@ public class Game{
         //printed separate messages ask if the player wants to continue
         startAgain(sc);
     }
-    //Method to find out if the game is over
+    //Method to find out if game is won.
     public Boolean gameOver(Player player){
-
-        /*Game is over if player misses equals max number of misses,
-          or the word has been guessed. */
-        //if (condition)  is true, return true
         return (player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length());
     }
     //Print missing letters from Object player
@@ -78,8 +73,7 @@ public class Game{
         System.out.println();
         System.out.println(str);
     }
-    //Depending on the number of misses
-    //print different hangman's.
+    //Print hangman, depending on number of misses.
     public void printHangman(int miss){
         ArrayList<String> screen = new ArrayList<>();
         for(int i = 0 ; i <= 9 ; ++i){
@@ -137,12 +131,11 @@ public class Game{
     }
     //Handle and input player input into Player object.
     public char handleInput(Player player, Scanner sc){
-        //Scanner sc = new Scanner(System.in);
+        
         char c = 'a';
         System.out.println();
         System.out.println("Guess a letter.");
         System.out.println();
-        //After try block scanner is now closed
         try{
             c = sc.next().charAt(0);//get next char
             Boolean correct = isLetter(c);//check if it's a letter
@@ -151,7 +144,6 @@ public class Game{
                 System.out.println("Only input letters a-z and A-Z.");
                 handleInput(player, sc);
             }
-
 
         }catch (Exception e){
             System.out.println("Error in Game.handleInput() method!");
