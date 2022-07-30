@@ -283,7 +283,7 @@ public class Game{
     //Check if the player won or loss.
     // if (condition)  is false return false
     public Boolean wonOrLoss(Player player){
-        return (player.playerMisses.size() == player.getMaxNumberMisses());
+        return !(player.playerMisses.size() == player.getMaxNumberMisses());
     }
     //Print the win or loss screen.
     public void winningMessage(Boolean won, Player player ){
@@ -302,14 +302,12 @@ public class Game{
     public void startAgain(Scanner sc){
         String yes = "yes";
         String no= "no";
-        //Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to play again? (yes or no).");
-
         //after try block scanner is closed
         try{
-            sc.next();
-            String input = sc.nextLine(); // read user input
-            System.out.println(input);
+
+            String input = sc.next(); // read user input
+
             if(yes.equalsIgnoreCase(input)){
 
             }else if (no.equalsIgnoreCase(input)){
@@ -321,6 +319,6 @@ public class Game{
         }catch(Exception e){
             System.out.println("Error in Game.startAgain() method!");
         }
-        System.out.println("Let's start OVERRRR");
+
     }
 }
