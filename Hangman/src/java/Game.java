@@ -29,7 +29,8 @@ public class Game{
             printHangman(player.getMiss());
             //check if game is over if we have lost the game
             isComplete = gameOver(player);
-            System.out.println("");
+            System.out.println("Game not over");
+            System.out.println();
             //print missing letters
             printMissingLetters(player);
             //print progress of Hangman word
@@ -46,31 +47,28 @@ public class Game{
         winningMessage(playerWon, player);
 
         //printed separate messages ask if the player wants to continue
-        startAgain(player);
+        startAgain();
     }
     //Method to find out if the game is over
     public Boolean gameOver(Player player){
 
         /*Game is over if player misses equals max number of misses,
           or the word has been guessed. */
-        if(player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length()){
-            return true;
-        }
-
-        return false;
+        //if (condition)  is false return false
+        return (player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length());
     }
     //Print missing letters from Object player
     public void printMissingLetters(Player player){
         //replace brackets and commas with ""
         String str = Arrays.toString(player.playerMisses.toArray()).replace("[","").replace(",","").replace("]","");
-        System.out.println("");
+        System.out.println();
         System.out.println("Missed letters: "+ str);
     }
     //Print progress on guessing secret word.
     public void printProgress(Player player){
         //replace brackets and commas with ""
         String str = Arrays.toString(player.secretWord.toArray()).replace("[","").replace(",","").replace("]","");
-        System.out.println("");
+        System.out.println();
         System.out.println(str);
     }
     //Depending on the number of misses
@@ -79,88 +77,88 @@ public class Game{
         switch (miss){
             case 0:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 1:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 2:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("     |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 3:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 4:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("\\|   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 5:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("\\|/   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("    ===");
                 break;
             case 6:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("\\|/   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
                 System.out.println("/");
                 System.out.println("    ===");
                 break;
             case 7:
                 System.out.println(" +---+");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" O   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println("\\|/   |");
-                System.out.println("");
+                System.out.println();
                 System.out.println(" |   |");
                 System.out.println("/ \\");
                 System.out.println("    ===");
@@ -178,12 +176,12 @@ public class Game{
         char letter = handleInput(player);
         String str = "" + letter;//convert letter to string
         //Check if letter has already been guessed
-        boolean isGuessed = isRepeated(letter, player);
+        Boolean isGuessed = isRepeated(letter, player);
         if(isGuessed){
             System.out.println("You have already guessed that letter. Choose again.");
             playerGuess(player); //restart player guess
         }else{
-            boolean isHit = correctGuess(str, player);
+            Boolean isHit = correctGuess(str, player);
             if(!isHit){ //incorrect guess
                 updateMiss(str, player);
             }else{ //correct guess
@@ -195,13 +193,14 @@ public class Game{
     //Handle and input player input into Player object.
     public char handleInput(Player player){
         Scanner sc = new Scanner(System.in);
-        char c = ' ';
-        System.out.println("");
+        char c = 'a';
+        System.out.println();
         System.out.println("Guess a letter.");
-        System.out.println("");
+        System.out.println();
         try{
             c = sc.next().charAt(0);//get next char
-            boolean correct = isLetter(c);//check if it's a letter
+            //sc.close();
+            Boolean correct = isLetter(c);//check if it's a letter
 
             if(!correct){
                 System.out.println("Only input letters a-z and A-Z.");
@@ -211,18 +210,19 @@ public class Game{
 
         }catch (Exception e){
             System.out.println("Error in Game.handleInput() method!");
+            System.exit(1);
         }
         return c;
     }
     //check if char is a letter
-    private boolean isLetter(char c){
+    private Boolean isLetter(char c){
         return ( c >= 'a' && c<= 'z') ||
                 (c >= 'A' && c<= 'Z');
     }
     //Check if letter ha been guessed.
-    public boolean isRepeated(char l, Player player){
+    public Boolean isRepeated(char l, Player player){
         String str = ""+l;
-        str.toLowerCase();
+        str = str.toLowerCase();
         //iterate through arraylist and check if letter has been guessed
         ListIterator<String> iterator = player.getPlayerMisses().listIterator();
         while (iterator.hasNext()){
@@ -235,7 +235,7 @@ public class Game{
         return false;
     }
     //Check if guess is a hit
-    public boolean correctGuess (String s, Player player){
+    public Boolean correctGuess (String s, Player player){
         ListIterator<String> iterator = player.hangmanArray.listIterator();
         while(iterator.hasNext()){
             //correct guess
@@ -264,19 +264,17 @@ public class Game{
         }
     }
     //Check if the player won or loss.
-    public boolean wonOrLoss(Player player){
-        if(player.playerMisses.size() == player.getMaxNumberMisses()){
-            return false;
-        }
-        return true;
+    // if (condition)  is false return false
+    public Boolean wonOrLoss(Player player){
+        return (player.playerMisses.size() == player.getMaxNumberMisses());
     }
     //Print the win or loss screen.
     public void winningMessage(Boolean won, Player player ){
         //print lose message
         if(!won){
-            System.out.println("");
+            System.out.println();
             System.out.println("Max number of guesses!");
-            System.out.println("");
+            System.out.println();
             System.out.println("Game Over!");
         } else{ //print win message
             System.out.println("Yes! The secret word is "+ player.HangmanWord + "! You have won!");
@@ -284,7 +282,7 @@ public class Game{
     }
 
     //Ask if the player wants to play again.
-    public void startAgain(Player player){
+    public void startAgain(){
 
         String yes = "yes";
         String no= "no";
@@ -298,7 +296,7 @@ public class Game{
                 initialize();
 
             }else if (no.equalsIgnoreCase(input)){
-
+                System.exit(0);
             }else{
                 throw new Exception("Player input was not (yes or not).");
             }

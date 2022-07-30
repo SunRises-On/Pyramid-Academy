@@ -8,7 +8,7 @@ public class Player{
 
     //Arraylist to keep track of misses
     public ArrayList<String> playerMisses = new ArrayList<>();
-   public static final int maxNumberMisses = 7; // max number of misses
+   public final int maxNumberMisses = 7; // max number of misses
     public int hit; //number of hits
     public int miss; // number of misses;
     //constructor
