@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.ListIterator;
+import java.util.Scanner;
 
 public class Game{
 
@@ -32,14 +34,19 @@ public class Game{
             printMissingLetters(player);
             //print progress of Hangman word
             printProgress(player);
-
+            //Guess a letter
+            playerGuess(player);
             //check if completed the game
             isComplete = gameOver(player);
         }
         //Game is over, check if player won;
         playerWon = wonOrLoss(player);
 
-        //if game is over
+        //Print the winning or losing message
+        winningMessage(playerWon, player);
+
+        //printed separate messages ask if the player wants to continue
+        startAgain();
     }
     //Method to find out if the game is over
     public Boolean gameOver(Player player){
@@ -164,14 +171,120 @@ public class Game{
         }
 
     }
-    //Check if the player won or loss
+    //Handle player guess
+    public void playerGuess( Player player) {
+
+        //handle guess input
+        char letter = handleInput(player);
+        String str = "" + letter;//convert letter to string
+        //Check if letter has already been guessed
+        boolean isGuessed = isRepeated(letter, player);
+        if(isGuessed){
+            System.out.println("You have already guessed that letter. Choose again.");
+            playerGuess(player); //restart player guess
+        }else{
+            boolean isHit = correctGuess(str, player);
+            if(!isHit){ //incorrect guess
+                updateMiss(player);
+            }else{ //correct guess
+                updateHit(player);
+            }
+        }
+
+    }
+    //Handle and input player input into Player object.
+    public char handleInput(Player player){
+        Scanner sc = new Scanner(System.in);
+        char c = ' ';
+        System.out.println("");
+        System.out.println("Guess a letter.");
+        System.out.println("");
+        try{
+            c = sc.next().charAt(0);//get next char
+            boolean correct = isLetter(c);//check if it's a letter
+
+            if(!correct){
+                System.out.println("Only input letters a-z and A-Z.");
+                handleInput(player);
+            }
+
+        }catch (Exception e){
+            System.out.println("Error in Game.handleInput() method!");
+        }
+        return c;
+    }
+    //check if char is a letter
+    private boolean isLetter(char c){
+        return ( c >= 'a' && c<= 'z') ||
+                (c >= 'A' && c<= 'Z');
+    }
+    //Check if letter ha been guessed.
+    public boolean isRepeated(char l, Player player){
+        String str = ""+l;
+        str.toLowerCase();
+        //iterate through arraylist and check if letter has been guessed
+        ListIterator<String> iterator = player.getPlayerMisses().listIterator();
+        while (iterator.hasNext()){
+            //== tests for reference equality (whether they are the same object
+            //.equals() tests for value equality
+            if(iterator.next().equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
+    //Check if guess is a hit
+    public boolean correctGuess (String s, Player player){
+        ListIterator<String> iterator = player.hangmanArray.listIterator();
+        while(iterator.hasNext()){
+            //correct guess
+            if(iterator.next().equals(s)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Check if the player won or loss.
     public boolean wonOrLoss(Player player){
         if(player.playerMisses.size() == player.getMaxNumberMisses()){
             return false;
         }
         return true;
     }
+    //Print the win or loss screen.
+    public void winningMessage(Boolean won, Player player ){
+        //print lose message
+        if(!won){
+            System.out.println("");
+            System.out.println("Max number of guesses!");
+            System.out.println("");
+            System.out.println("Game Over!");
+        } else{ //print win message
+            System.out.println("Yes! The secret word is "+ player.HangmanWord + "! You have won!");
+        }
+    }
 
+    //Ask if the player wants to play again.
+    public void startAgain(){
 
+        String yes = "yes";
+        String no= "no";
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Do you want to play again? (yes or no");
 
+        try{
+            String input = sc.nextLine(); // read user input
+            sc.close(); // close scanner
+            if(yes.equalsIgnoreCase(input)){
+                initialize(); //start again
+            }else if (no.equalsIgnoreCase(input)){
+
+            }else{
+                throw new Exception("Player input was not (yes or not).");
+            }
+        }catch(Exception e){
+            System.out.println("Error in Game.startAgain() method!");
+        }
+    }
 }

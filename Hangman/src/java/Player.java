@@ -9,13 +9,11 @@ public class Player{
     //Arraylist to keep track of misses
     public ArrayList<String> playerMisses = new ArrayList<>();
    public static final int maxNumberMisses = 7; // max number of misses
-    public int guesses; //number of guesses
     public int hit; //number of hits
     public int miss; // number of misses;
     //constructor
     public Player(String word){
-         HangmanWord = word;
-         guesses = 0;
+         HangmanWord = word.toLowerCase();
          hit = 0;
          miss = 0;
          //add an underscore to secretWord for each letter of "word".
@@ -26,9 +24,7 @@ public class Player{
              hangmanArray.add(str);
          }
     }
-    private void setGuesses(int setGuesses){
-        guesses = setGuesses;
-    }
+
     private void setHit(int setHit){
         hit = setHit;
     }
@@ -43,9 +39,6 @@ public class Player{
     }
 
     //get methods
-    public int getGuesses() {
-        return guesses;
-    }
     public int getMaxNumberMisses(){
         return maxNumberMisses;
     }
