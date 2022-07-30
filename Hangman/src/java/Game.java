@@ -23,6 +23,7 @@ public class Game{
     public void play(Player player){
         Boolean isComplete = false;
         Boolean playerWon = false;
+        Scanner sc = new Scanner(System.in);
         //While game is not over loop
         while(!isComplete){
             //Call print Hangman
@@ -36,10 +37,11 @@ public class Game{
             //print progress of Hangman word
             printProgress(player);
             //Guess a letter
-            playerGuess(player);
+            playerGuess(player, sc);
             //check if completed the game
             isComplete = gameOver(player);
         }
+
         //Game is over, check if player won;
         playerWon = wonOrLoss(player);
 
@@ -47,7 +49,7 @@ public class Game{
         winningMessage(playerWon, player);
 
         //printed separate messages ask if the player wants to continue
-        startAgain();
+        startAgain(sc);
     }
     //Method to find out if the game is over
     public Boolean gameOver(Player player){
@@ -170,16 +172,17 @@ public class Game{
 
     }
     //Handle player guess
-    public void playerGuess( Player player) {
+    public void playerGuess( Player player, Scanner sc) {
 
         //handle guess input
-        char letter = handleInput(player);
+        char letter = handleInput(player, sc);
         String str = "" + letter;//convert letter to string
         //Check if letter has already been guessed
-        Boolean isGuessed = isRepeated(letter, player);
+        Boolean isGuessed = isMissRepeated(letter, player);
+        isGuessed = isHitRepeated(letter, player);
         if(isGuessed){
             System.out.println("You have already guessed that letter. Choose again.");
-            playerGuess(player); //restart player guess
+            playerGuess(player, sc); //restart player guess
         }else{
             Boolean isHit = correctGuess(str, player);
             if(!isHit){ //incorrect guess
@@ -191,20 +194,20 @@ public class Game{
 
     }
     //Handle and input player input into Player object.
-    public char handleInput(Player player){
-        Scanner sc = new Scanner(System.in);
+    public char handleInput(Player player, Scanner sc){
+        //Scanner sc = new Scanner(System.in);
         char c = 'a';
         System.out.println();
         System.out.println("Guess a letter.");
         System.out.println();
+        //After try block scanner is now closed
         try{
             c = sc.next().charAt(0);//get next char
-            //sc.close();
             Boolean correct = isLetter(c);//check if it's a letter
 
             if(!correct){
                 System.out.println("Only input letters a-z and A-Z.");
-                handleInput(player);
+                handleInput(player, sc);
             }
 
 
@@ -220,11 +223,25 @@ public class Game{
                 (c >= 'A' && c<= 'Z');
     }
     //Check if letter ha been guessed.
-    public Boolean isRepeated(char l, Player player){
+    public Boolean isMissRepeated(char l, Player player){
         String str = ""+l;
         str = str.toLowerCase();
         //iterate through arraylist and check if letter has been guessed
         ListIterator<String> iterator = player.getPlayerMisses().listIterator();
+        while (iterator.hasNext()){
+            //== tests for reference equality (whether they are the same object
+            //.equals() tests for value equality
+            if(iterator.next().equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public Boolean isHitRepeated(char l, Player player){
+        String str = ""+l;
+        str = str.toLowerCase();
+        //iterate through arraylist and check if letter has been guessed
+        ListIterator<String> iterator = player.getSecretWord().listIterator();
         while (iterator.hasNext()){
             //== tests for reference equality (whether they are the same object
             //.equals() tests for value equality
@@ -282,20 +299,21 @@ public class Game{
     }
 
     //Ask if the player wants to play again.
-    public void startAgain(){
-
+    public void startAgain(Scanner sc){
         String yes = "yes";
         String no= "no";
-        Scanner sc = new Scanner(System.in);
+        //Scanner sc = new Scanner(System.in);
         System.out.println("Do you want to play again? (yes or no).");
 
+        //after try block scanner is closed
         try{
+            sc.next();
             String input = sc.nextLine(); // read user input
-            sc.close(); // close scanner
+            System.out.println(input);
             if(yes.equalsIgnoreCase(input)){
-                initialize();
 
             }else if (no.equalsIgnoreCase(input)){
+                sc.close();
                 System.exit(0);
             }else{
                 throw new Exception("Player input was not (yes or not).");
@@ -303,5 +321,6 @@ public class Game{
         }catch(Exception e){
             System.out.println("Error in Game.startAgain() method!");
         }
+        System.out.println("Let's start OVERRRR");
     }
 }
