@@ -1,4 +1,4 @@
-public class FindWord {
+public class Scan {
     final int wordCount = 2962;
 
     public String scanWordFile(){
