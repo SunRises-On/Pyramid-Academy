@@ -46,7 +46,7 @@ public class Game{
         winningMessage(playerWon, player);
 
         //printed separate messages ask if the player wants to continue
-        startAgain();
+        startAgain(player);
     }
     //Method to find out if the game is over
     public Boolean gameOver(Player player){
@@ -208,6 +208,7 @@ public class Game{
                 handleInput(player);
             }
 
+
         }catch (Exception e){
             System.out.println("Error in Game.handleInput() method!");
         }
@@ -283,18 +284,19 @@ public class Game{
     }
 
     //Ask if the player wants to play again.
-    public void startAgain(){
+    public void startAgain(Player player){
 
         String yes = "yes";
         String no= "no";
         Scanner sc = new Scanner(System.in);
-        System.out.println("Do you want to play again? (yes or no");
+        System.out.println("Do you want to play again? (yes or no).");
 
         try{
             String input = sc.nextLine(); // read user input
             sc.close(); // close scanner
             if(yes.equalsIgnoreCase(input)){
-                initialize(); //start again
+                initialize();
+
             }else if (no.equalsIgnoreCase(input)){
 
             }else{

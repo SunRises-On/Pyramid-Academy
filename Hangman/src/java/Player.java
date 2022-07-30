@@ -14,10 +14,13 @@ public class Player{
     //constructor
     public Player(String word){
          HangmanWord = word.toLowerCase();
+         playerMisses.clear();
+         secretWord.clear();
+         hangmanArray.clear();
          hit = 0;
          miss = 0;
          //add an underscore to secretWord for each letter of "word".
-         for(int i = 0; i< word.length()-1; ++i){
+         for(int i = 0; i< word.length(); ++i){
              secretWord.add("_");
              char c = word.charAt(i); //get a sing letter
              String str = ""+ c; //convert char to string
