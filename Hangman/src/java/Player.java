@@ -24,20 +24,21 @@ public class Player{
              hangmanArray.add(str);
          }
     }
+    public void updateHit(){
+        hit += 1;
+    }
+    public void updateMiss(){
+        miss += 1;
+    }
+    public void updateMissArray(String str){
 
-    private void setHit(int setHit){
-        hit = setHit;
+        playerMisses.add(str);
+        //setPlayerMisses( playerMisses.add(str));
     }
-    private void setMiss(int setMiss){
-        miss = setMiss;
+    //Change '_' to correct letter.
+    public void updateSecretArray(int index, String s){
+        secretWord.set(index,s);
     }
-    private void setSecretWord(ArrayList<String> setSecretWord){
-        secretWord = setSecretWord;
-    }
-    private void setPlayerMisses(ArrayList<String> setPlayerMisses){
-        playerMisses = setPlayerMisses;
-    }
-
     //get methods
     public int getMaxNumberMisses(){
         return maxNumberMisses;

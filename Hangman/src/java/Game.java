@@ -10,10 +10,10 @@ public class Game{
         System.out.println("We are playing Hangman.");
 
 
-        Scan scanFile = new Scan();
+       //// Scan scanFile = new Scan();
         //get hangman new word
-        String word = scanFile.scanWordFile();
-
+    /////    String word = scanFile.scanWordFile();
+        String word = "apple";
         Player newGame = new Player(word);
 
         //game is initialized go to rounds....
@@ -185,9 +185,9 @@ public class Game{
         }else{
             boolean isHit = correctGuess(str, player);
             if(!isHit){ //incorrect guess
-                updateMiss(player);
+                updateMiss(str, player);
             }else{ //correct guess
-                updateHit(player);
+                updateHit(str, player);
             }
         }
 
@@ -244,7 +244,24 @@ public class Game{
         }
         return false;
     }
+    //Update Player methods for the miss guess.
+    public void updateMiss(String s, Player player){
+        player.updateMiss(); //update int miss
+        player.updateMissArray(s);//update arraylist of miss characters
 
+    }
+    //Update player methods for the hit guess;
+    public void updateHit(String s, Player player){
+        ListIterator<String> iterator = player.hangmanArray.listIterator();
+        int i = 0;
+        while(iterator.hasNext()){
+            if(iterator.next().equals(s)){
+                player.updateHit();
+                player.updateSecretArray(i,s);
+            }
+            ++i;
+        }
+    }
     //Check if the player won or loss.
     public boolean wonOrLoss(Player player){
         if(player.playerMisses.size() == player.getMaxNumberMisses()){
