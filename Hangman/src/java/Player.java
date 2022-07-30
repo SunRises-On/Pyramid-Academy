@@ -2,10 +2,12 @@ import java.util.ArrayList;
 
 public class Player{
     public String HangmanWord; //find word
-    ArrayList<String> secretWord = new ArrayList<>();
+    //ArrayList to compare values
+    public ArrayList<String> hangmanArray = new ArrayList<>();
+    public ArrayList<String> secretWord = new ArrayList<>();
 
     //Arraylist to keep track of misses
-    ArrayList<String> playerMisses = new ArrayList<>();
+    public ArrayList<String> playerMisses = new ArrayList<>();
    public static final int maxNumberMisses = 7; // max number of misses
     public int guesses; //number of guesses
     public int hit; //number of hits
@@ -17,8 +19,11 @@ public class Player{
          hit = 0;
          miss = 0;
          //add an underscore to secretWord for each letter of "word".
-         for(int i = 0; i< word.length(); ++i){
+         for(int i = 0; i< word.length()-1; ++i){
              secretWord.add("_");
+             char c = word.charAt(i); //get a sing letter
+             String str = ""+ c; //convert char to string
+             hangmanArray.add(str);
          }
     }
     private void setGuesses(int setGuesses){
@@ -55,5 +60,8 @@ public class Player{
     }
     public ArrayList<String> getPlayerMisses(){
         return playerMisses;
+    }
+    public ArrayList<String> getHangmanArray(){
+        return hangmanArray;
     }
 }
