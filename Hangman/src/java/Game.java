@@ -9,7 +9,7 @@ public class Game{
         Scan scanFile = new Scan();
         //get hangman new word
         String word = scanFile.scanWordFile();
-        System.out.println("Answer = "+word);
+        //System.out.println("Answer = "+word);
 
         Player newGame = new Player(word);
         isComplete = false;
@@ -20,12 +20,12 @@ public class Game{
     public void play(Player player){
         int flag = 0;
         Scanner sc = new Scanner(System.in);
-        menu(player, flag);
+        UI(player, flag);
         flag = 1; //printed welcome message
         //While game is not over loop
         while(!isComplete){
 
-            menu( player, flag);
+            UI( player, flag);
             //Guess a letter
             guess(player, sc);
             //check if completed the game
@@ -34,18 +34,18 @@ public class Game{
         //Game is over, check if player won;
         flag = wonOrLoss(player);
         //Print the winning or losing message
-        menu(player, flag);
+        UI(player, flag);
         //printed separate messages ask if the player wants to continue
         startAgain(sc);
     }
-    public void menu(Player player, int flag){
+    public void UI(Player player, int flag){
 
         if(flag <3 && flag>0) {
             printHangman(player.getMiss()); // print hangman
         }
 
         switch (flag) {
-            case 0->screen.add("We are playing Hangman."); //first message of game
+            case 0->screen.add("HANGMAN"); //first message of game
             case 1 -> { //play(), still playing game
                 gameOver(player);
                 if (isComplete) {
@@ -130,7 +130,7 @@ public class Game{
     public char handleInput(Player player, Scanner sc){
 
         char c = 'a';
-        menu(null ,4);
+        UI(null ,4);
         try{
             c = sc.next().charAt(0);//get next char
             Boolean correct = isLetter(c);//check if it's a letter
@@ -179,7 +179,7 @@ public class Game{
     public void startAgain(Scanner sc){
         String yes = "yes";
         String no= "no";
-        menu(null, 5);
+        UI(null, 5);
 
         try{
 
