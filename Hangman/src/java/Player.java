@@ -11,11 +11,13 @@ public class Player{
    public final int maxNumberMisses = 7; // max number of misses
     public int hit; //number of hits
     public int miss; // number of misses;
+    public Boolean won;
     //constructor
     public Player(String word){
          HangmanWord = word.toLowerCase();
          hit = 0;
          miss = 0;
+         won = false;
          //add an underscore to secretWord for each letter of "word".
          for(int i = 0; i< word.length(); ++i){
              secretWord.add("_");
@@ -39,6 +41,9 @@ public class Player{
     public void updateSecretArray(int index, String s){
         secretWord.set(index,s);
     }
+    public void updateWon(Boolean isWon){
+        won = isWon;
+    }
     //get methods
     public int getMaxNumberMisses(){
         return maxNumberMisses;
@@ -49,6 +54,9 @@ public class Player{
     public int getMiss(){
         return miss;
     }
+    public Boolean getWon(){
+        return won;
+    }
     public ArrayList<String> getSecretWord(){
         return secretWord;
     }
@@ -58,4 +66,5 @@ public class Player{
     public ArrayList<String> getHangmanArray(){
         return hangmanArray;
     }
+
 }
