@@ -50,8 +50,8 @@ public class Game{
                 if(isComplete){
                     return;
                 }
-                String missing = missingLetters(player); //get missing letters
-                String progress = progress(player); //get current progress
+                String missing = trim(player.getPlayerMisses()); //get missing letters
+                String progress = "Missed letters: "+ trim(player.getSecretWord()); //get current progress
                 Collections.addAll(screen,"",missing,"",progress);
                 break;
             case 2: //print losing message
@@ -67,48 +67,40 @@ public class Game{
     public void gameOver(Player player){
         isComplete = (player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length());
     }
-    //Return string with missing letters, remove brackets and commas.
-    public String missingLetters(Player player){
+    //Trim brackets and commas.
+    public String trim(ArrayList<String> arr){
         //replace brackets and commas with ""
-        String str = Arrays.toString(player.playerMisses.toArray()).replace("[","").replace(",","").replace("]","");
-        str = "Missed letters: "+ str;
-        return str;
-    }
-    //Print progress on guessing secret word.
-    public String progress(Player player){
-        //replace brackets and commas with ""
-        return Arrays.toString(player.secretWord.toArray()).replace("[","").replace(",","").replace("]","");
+        return Arrays.toString(arr.toArray()).replace("[","").replace(",","").replace("]","");
     }
     //Print hangman, depending on number of misses.
     public void printHangman(int miss){
         ArrayList<String> screen = new ArrayList<>();
-        for(int i = 0 ; i <= 9 ; ++i){
-            screen.add("");
-        }
 
-        screen.set(0," +---+");//index 0
-        //index 2
-        String line2 = miss > 0 ? (" O   |") :("     |");
-        screen.set(2,line2);
+        //create a basic hangman
+        Collections.addAll(screen," +---+","","     |","","     |","","     |","","    ===");
 
-        if(miss<2){
-            screen.set(4,"     |");
-        }else if (miss <4) {
-            screen.set(4," |   |");
-        }else if (miss == 4){
-            screen.set(4, "\\|  |");
-        }else{
-            screen.set(4,"\\|/  |");
+        switch(miss) {
+            case 4:
+                screen.add(4, "\\|  |");
+            case 3:
+                screen.set(6, " |   |");
+            case 2, 5, 6, 7:
+                screen.set(4, " |   |");
+            case 1:
+                screen.set(2, " O   |");
+                break;
         }
-        String index6 = miss < 3 ?"     |" :" |   |" ;
-        screen.set(6,index6);
-
-        if(miss == 6){
-            screen.set(7,"/");
-        }else if (miss == 7){
-            screen.set(7,"/ \\");
+        switch(miss) {
+            case 5, 6, 7:
+                screen.add(4, "\\|/  |");
         }
-        screen.set(8,"    ===");
+        switch(miss){
+            case 6:
+                screen.set(7,"/");
+                break;
+            case 7:
+                screen.set(7,"/ \\");
+        }
         printArray(screen);
     }
     //Print and clear array
@@ -126,15 +118,15 @@ public class Game{
         String str = "" + letter;//convert letter to string
         str = str.toLowerCase();
         //Check if letter has already been guessed
-        Boolean isGuessed = isEqual( str, player.getPlayerMisses()); //check if letter is in misses
-        if(!isGuessed){
-            isGuessed = isEqual(str, player.getSecretWord()); //check if letter is already guessed
+        boolean isGuessed = player.getPlayerMisses().contains(str);
+        if(!isGuessed){ //check if it has successfully been guessed
+            isGuessed = player.getSecretWord().contains(str);
         }
         if(isGuessed){
             System.out.println("You have already guessed that letter. Choose again.");
             playerGuess(player, sc); //restart player guess
         }else{
-            Boolean isHit = isEqual(str, player.getHangmanArray());
+            boolean isHit = player.getHangmanArray().contains(str);
             if(!isHit){ //incorrect guess
                 updateMiss(str, player);
             }else{ //correct guess
@@ -166,18 +158,7 @@ public class Game{
     }
     //check if char is a letter
     private Boolean isLetter(char c){
-        return ( c >= 'a' && c<= 'z') ||
-                (c >= 'A' && c<= 'Z');
-    }
-    //Check if String letter is in ArrayList
-    public Boolean isEqual(String letter, ArrayList<String> arr){
-
-        for(String element : arr){
-            if(element.equals(letter)){ //.equals()tests for equality, == tests for reference equality(whether they are the same object)
-                return true;
-            }
-        }
-        return false;
+        return ( c >= 'a' && c<= 'z') || (c >= 'A' && c<= 'Z');
     }
     //Update Player methods for the miss guess.
     public void updateMiss(String s, Player player){
