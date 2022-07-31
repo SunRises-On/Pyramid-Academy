@@ -5,29 +5,29 @@ public class Game{
     //set up new game
     public void initialize(){
 
-        System.out.println("We are playing Hangman.");
-
         Scan scanFile = new Scan();
         //get hangman new word
         String word = scanFile.scanWordFile();
         System.out.println("Answer = "+word);
-      //  String word = "apple";
+
         Player newGame = new Player(word);
         isComplete = false;
-        //game is initialized go to rounds....
-        play(newGame);
+
+        play(newGame); //loop to play
     }
     //Play the game
     public void play(Player player){
-        int flag = 1;
+        int flag = 0;
         Scanner sc = new Scanner(System.in);
         ArrayList<String> screen = new ArrayList<>();
+        menu(player, screen, flag);
+        flag = 1; //printed welcome message
         //While game is not over loop
         while(!isComplete){
 
             menu( player, screen, flag);
             //Guess a letter
-            playerGuess(player, sc);
+            guess(player, sc);
             //check if completed the game
             gameOver(player);
         }
@@ -40,32 +40,31 @@ public class Game{
     }
     public void menu(Player player, ArrayList<String> screen, int flag){
 
-        if(flag <3) {
+        if(flag <3 && flag>0) {
             printHangman(player.getMiss()); // print hangman
         }
 
-        switch(flag){
-            case 1: //still playing print missing letters and progress so far
+        switch (flag) {
+            case 0->screen.add("We are playing Hangman.");
+            case 1 -> { //still playing print missing letters and progress so far
                 gameOver(player);
-                if(isComplete){
+                if (isComplete) {
                     return;
                 }
-                String missing = trim(player.getPlayerMisses()); //get missing letters
-                String progress = "Missed letters: "+ trim(player.getSecretWord()); //get current progress
-                Collections.addAll(screen,"",missing,"",progress);
-                break;
-            case 2: //print losing message
-                Collections.addAll(screen,"","Max number of guesses!","","GameOver!");
-                break;
-            case 3: //print winning message
-                screen.add("Yes! The secret word is "+ player.HangmanWord + "! You have won!");
-                break;
+                String missing = "Missed letters: " +trim(player.getPlayerMisses()); //get missing letters
+                String progress = trim(player.getSecretWord()); //get current progress
+                Collections.addAll(screen, "", missing, "", progress);
+            }
+            case 2 -> //print losing message
+                    Collections.addAll(screen, "", "Max number of guesses!", "", "GameOver!");
+            case 3 -> //print winning message
+                    screen.add("Yes! The secret word is " + player.getHangmanWord() + "! You have won!");
         }
         printArray(screen); //print menu
     }
     //Method to find out if game is won.
     public void gameOver(Player player){
-        isComplete = (player.miss == player.maxNumberMisses || player.hit == player.HangmanWord.length());
+        isComplete = (player.getMiss() == player.getMaxNumberMisses() || player.getHit() == player.getHangmanWord().length());
     }
     //Trim brackets and commas.
     public String trim(ArrayList<String> arr){
@@ -80,26 +79,17 @@ public class Game{
         Collections.addAll(screen," +---+","","     |","","     |","","     |","","    ===");
 
         switch(miss) {
-            case 4:
-                screen.add(4, "\\|  |");
-            case 3:
-                screen.set(6, " |   |");
-            case 2, 5, 6, 7:
-                screen.set(4, " |   |");
-            case 1:
-                screen.set(2, " O   |");
-                break;
+            case 3, 4, 5, 6, 7: screen.set(6, " |   |");
+            case 2: screen.set(4, " |   |");
+            case 1: screen.set(2, " O   |");
         }
-        switch(miss) {
-            case 5, 6, 7:
-                screen.add(4, "\\|/  |");
+        switch (miss) {
+            case 4->screen.set(4, "\\|   |");
+            case 5, 6, 7 -> screen.set(4, "\\|/  |");
         }
-        switch(miss){
-            case 6:
-                screen.set(7,"/");
-                break;
-            case 7:
-                screen.set(7,"/ \\");
+        switch (miss) { //enhanced switch -> will break
+            case 6 -> screen.set(7, "/");
+            case 7 -> screen.set(7, "/ \\");
         }
         printArray(screen);
     }
@@ -111,7 +101,7 @@ public class Game{
         ar.clear();
     }
     //Handle player guess
-    public void playerGuess( Player player, Scanner sc) {
+    public void guess( Player player, Scanner sc) {
 
         //handle guess input
         char letter = handleInput(player, sc);
@@ -124,7 +114,7 @@ public class Game{
         }
         if(isGuessed){
             System.out.println("You have already guessed that letter. Choose again.");
-            playerGuess(player, sc); //restart player guess
+            guess(player, sc); //restart player guess
         }else{
             boolean isHit = player.getHangmanArray().contains(str);
             if(!isHit){ //incorrect guess
@@ -168,7 +158,7 @@ public class Game{
     }
     //Update player methods for the hit guess;
     public void updateHit(String s, Player player){
-        ListIterator<String> iterator = player.hangmanArray.listIterator();
+        ListIterator<String> iterator = player.getHangmanArray().listIterator();
         int i = 0;
         while(iterator.hasNext()){
             if(iterator.next().equals(s)){
@@ -180,10 +170,7 @@ public class Game{
     }
     //Update Player Object with won or lose of game and update flag
     public int wonOrLoss(Player player){
-        boolean won = (!(player.playerMisses.size() == player.getMaxNumberMisses()));
-        player.updateWon(won);
-
-        if(!won){ //if player lost return flag = 2
+        if((player.getPlayerMisses().size() == player.getMaxNumberMisses())){ //if player lost return flag = 2
             return 2;
         }
         return 3;
@@ -193,7 +180,7 @@ public class Game{
         String yes = "yes";
         String no= "no";
         System.out.println("Do you want to play again? (yes or no).");
-        //after try block scanner is closed
+
         try{
 
             String input = sc.next(); // read user input

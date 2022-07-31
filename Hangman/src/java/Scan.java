@@ -20,7 +20,7 @@ public class Scan {
                 found = scanner.nextLine();
                 lineNumber++;
             }
-
+            scanner.close();
         }catch( FileNotFoundException e){
             System.out.println("Word.txt file not found");
         }
