@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game{
     public Boolean isComplete;
@@ -27,8 +24,8 @@ public class Game{
         ArrayList<String> screen = new ArrayList<>();
         //While game is not over loop
         while(!isComplete){
+
             menu( player, screen, flag);
-            screen.clear();
             //Guess a letter
             playerGuess(player, sc);
             //check if completed the game
@@ -36,10 +33,8 @@ public class Game{
         }
         //Game is over, check if player won;
         flag = wonOrLoss(player);
-
         //Print the winning or losing message
         menu(player, screen, flag);
-
         //printed separate messages ask if the player wants to continue
         startAgain(sc);
     }
@@ -48,29 +43,22 @@ public class Game{
         if(flag <3) {
             printHangman(player.getMiss()); // print hangman
         }
-        gameOver(player);
-        if(isComplete){
-            return;
-        }
-        //flag 1
+
         switch(flag){
             case 1: //still playing print missing letters and progress so far
-                screen.add("");
-                String missing = missingLetters(player);
-                screen.add(missing);
-                screen.add("");
-                //print progress of Hangman word
-                String progress = progress(player);
-                screen.add(progress);
+                gameOver(player);
+                if(isComplete){
+                    return;
+                }
+                String missing = missingLetters(player); //get missing letters
+                String progress = progress(player); //get current progress
+                Collections.addAll(screen,"",missing,"",progress);
                 break;
             case 2: //print losing message
-                screen.add("");
-                screen.add("Max number of guesses!");
-                screen.add("");
-                screen.add("Game Over!");
+                Collections.addAll(screen,"","Max number of guesses!","","GameOver!");
                 break;
             case 3: //print winning message
-                System.out.println("Yes! The secret word is "+ player.HangmanWord + "! You have won!");
+                screen.add("Yes! The secret word is "+ player.HangmanWord + "! You have won!");
                 break;
         }
         printArray(screen); //print menu
@@ -142,7 +130,6 @@ public class Game{
         if(!isGuessed){
             isGuessed = isEqual(str, player.getSecretWord()); //check if letter is already guessed
         }
-       // isGuessed = isHitRepeated( str, player.getSecretWord());
         if(isGuessed){
             System.out.println("You have already guessed that letter. Choose again.");
             playerGuess(player, sc); //restart player guess
@@ -154,7 +141,6 @@ public class Game{
                 updateHit(str, player);
             }
         }
-
     }
     //Handle and input player input into Player object.
     public char handleInput(Player player, Scanner sc){
@@ -205,17 +191,18 @@ public class Game{
         int i = 0;
         while(iterator.hasNext()){
             if(iterator.next().equals(s)){
-                player.updateHit();
-                player.updateSecretArray(i,s);
+                player.updateHit(); //We've found a hit
+                player.updateSecretArray(i,s); //update secret Array with found letter(s)
             }
             ++i;
         }
     }
     //Update Player Object with won or lose of game and update flag
     public int wonOrLoss(Player player){
-        Boolean won = (!(player.playerMisses.size() == player.getMaxNumberMisses()));
+        boolean won = (!(player.playerMisses.size() == player.getMaxNumberMisses()));
         player.updateWon(won);
-        if(!won){
+
+        if(!won){ //if player lost return flag = 2
             return 2;
         }
         return 3;
@@ -241,6 +228,5 @@ public class Game{
         }catch(Exception e){
             System.out.println("Error in Game.startAgain() method!");
         }
-
     }
 }
