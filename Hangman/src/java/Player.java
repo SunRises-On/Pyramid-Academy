@@ -33,7 +33,6 @@ public class Player{
     public void updateMissArray(String str){
 
         playerMisses.add(str);
-        //setPlayerMisses( playerMisses.add(str));
     }
     //Change '_' to correct letter.
     public void updateSecretArray(int index, String s){

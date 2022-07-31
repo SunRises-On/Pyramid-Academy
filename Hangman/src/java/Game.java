@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Game{
     public Boolean isComplete;
+    public ArrayList<String> screen;
     //set up new game
     public void initialize(){
 
@@ -12,20 +13,19 @@ public class Game{
 
         Player newGame = new Player(word);
         isComplete = false;
-
+        screen = new ArrayList<>();
         play(newGame); //loop to play
     }
     //Play the game
     public void play(Player player){
         int flag = 0;
         Scanner sc = new Scanner(System.in);
-        ArrayList<String> screen = new ArrayList<>();
-        menu(player, screen, flag);
+        menu(player, flag);
         flag = 1; //printed welcome message
         //While game is not over loop
         while(!isComplete){
 
-            menu( player, screen, flag);
+            menu( player, flag);
             //Guess a letter
             guess(player, sc);
             //check if completed the game
@@ -34,19 +34,19 @@ public class Game{
         //Game is over, check if player won;
         flag = wonOrLoss(player);
         //Print the winning or losing message
-        menu(player, screen, flag);
+        menu(player, flag);
         //printed separate messages ask if the player wants to continue
         startAgain(sc);
     }
-    public void menu(Player player, ArrayList<String> screen, int flag){
+    public void menu(Player player, int flag){
 
         if(flag <3 && flag>0) {
             printHangman(player.getMiss()); // print hangman
         }
 
         switch (flag) {
-            case 0->screen.add("We are playing Hangman.");
-            case 1 -> { //still playing print missing letters and progress so far
+            case 0->screen.add("We are playing Hangman."); //first message of game
+            case 1 -> { //play(), still playing game
                 gameOver(player);
                 if (isComplete) {
                     return;
@@ -55,10 +55,14 @@ public class Game{
                 String progress = trim(player.getSecretWord()); //get current progress
                 Collections.addAll(screen, "", missing, "", progress);
             }
-            case 2 -> //print losing message
+            case 2 -> //play() print losing message
                     Collections.addAll(screen, "", "Max number of guesses!", "", "GameOver!");
-            case 3 -> //print winning message
+            case 3 -> //play() print winning message
                     screen.add("Yes! The secret word is " + player.getHangmanWord() + "! You have won!");
+            case 4-> //handleInput()
+                    Collections.addAll(screen,"","Guess a letter.","");
+            case 5-> //startAgain()
+                    screen.add("Do you want to play again? (yes or no).");
         }
         printArray(screen); //print menu
     }
@@ -73,8 +77,6 @@ public class Game{
     }
     //Print hangman, depending on number of misses.
     public void printHangman(int miss){
-        ArrayList<String> screen = new ArrayList<>();
-
         //create a basic hangman
         Collections.addAll(screen," +---+","","     |","","     |","","     |","","    ===");
 
@@ -128,9 +130,7 @@ public class Game{
     public char handleInput(Player player, Scanner sc){
 
         char c = 'a';
-        System.out.println();
-        System.out.println("Guess a letter.");
-        System.out.println();
+        menu(null ,4);
         try{
             c = sc.next().charAt(0);//get next char
             Boolean correct = isLetter(c);//check if it's a letter
@@ -179,7 +179,7 @@ public class Game{
     public void startAgain(Scanner sc){
         String yes = "yes";
         String no= "no";
-        System.out.println("Do you want to play again? (yes or no).");
+        menu(null, 5);
 
         try{
 
