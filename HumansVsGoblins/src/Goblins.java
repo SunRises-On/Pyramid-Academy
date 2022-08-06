@@ -1,6 +1,6 @@
 public class Goblins extends Sprite{
     //private Loot loot;
-    private final char goblin = 'g';
+    private final String goblin = "g";
     public Goblins(int xPos, int yPos){
         this.x = xPos;
         this.y = yPos;

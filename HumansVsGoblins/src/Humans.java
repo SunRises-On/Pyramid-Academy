@@ -17,7 +17,7 @@ public class Humans extends Sprite implements Commons, Inventory{
     private int health;
     private int attack;
     private int defense;
-    private final char human = 'h';
+    private final String human = "h";
     Humans(){
 
     }

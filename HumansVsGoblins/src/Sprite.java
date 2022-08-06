@@ -1,6 +1,6 @@
 public class Sprite {
     private boolean isVisible;
-    private char image;
+    private String image;
     protected int x;
     protected int y;
     protected boolean isDead;
@@ -16,10 +16,10 @@ public class Sprite {
     protected void setIsVisible(boolean newVisible){
         this.isVisible = isVisible;
     }
-    public void setImage  (char newImage){
+    public void setImage  (String newImage){
         this.image = newImage;
     }
-    public char getImage (){
+    public String getImage (){
         return image;
     }
     public void setX(int x){
