@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Dimension extends Sprite implements Commons{
@@ -10,15 +11,22 @@ public class Dimension extends Sprite implements Commons{
         row = new ArrayList<String>();
         x = BOARD_WIDTH;
         y = BOARD_HEIGHT;
-        //add space to width
-        for(int i = 0 ; i < x  ; ++x){
+        //add space to row
+        for(int i = 0 ; i < x  ; ++i){
             row.add("0");
         }
         //add rows
-        for(int i = 0; i <y ; ++y){
+        for(int i = 0; i <y ; ++i){
             screen.add(row);
         }
 
+    }
+
+    public void printDimension(){
+        for(List<String> inner : screen){
+            String format = Arrays.toString(inner.toArray()).replace(",","").replace("[","").replace("]","");
+            System.out.println(format);
+        }
     }
 }
 
