@@ -30,7 +30,7 @@ public class Dimension extends Sprite implements Commons{
     }
     public boolean isFree(int[] pos){
         int rowSet = pos[0]; // x
-        int column = pos[1]; // y 
+        int column = pos[1]; // y
         Character c = screen.get(column).get(rowSet);
         if(c != '0'){
             return false;
@@ -45,7 +45,10 @@ public class Dimension extends Sprite implements Commons{
     }
 
     public Character getIndexImage(int[] pos){
+        int rowSet = pos[0]; // x
+        int column = pos[1]; // y
         Character c = ' ';
+        
 
 
         return c;
