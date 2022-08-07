@@ -29,10 +29,9 @@ public class Dimension extends Sprite implements Commons{
         }
     }
     public boolean isFree(int[] pos){
-        int x = pos[0];
-        int y = pos[1];
-        int i = 0;
-        Character c = screen.get(x).get(y);
+        int rowSet = pos[0]; // x
+        int column = pos[1]; // y 
+        Character c = screen.get(column).get(rowSet);
         if(c != '0'){
             return false;
         }
@@ -40,10 +39,16 @@ public class Dimension extends Sprite implements Commons{
         return true;
     }
     public void setIndex (int[] pos, Character image){
-        int x = pos[0];
-        int y = pos[1];
-        int i = 0;
-        screen.get(y).set(x, image);
+        int rowSet = pos[0]; // x
+        int column = pos[1]; // y
+        screen.get(column).set(rowSet, image);
+    }
+
+    public Character getIndexImage(int[] pos){
+        Character c = ' ';
+
+
+        return c;
     }
 }
 
