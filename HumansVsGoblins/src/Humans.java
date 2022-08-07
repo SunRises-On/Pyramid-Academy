@@ -21,7 +21,7 @@ public class Humans extends Sprite implements Commons, Inventory{
     Humans(){
 
     }
-    Humans(int xPos, int yPos){
+    Humans(int[] pos){
         Armour basicBoots = new BasicBoots(true);
         Armour basicBreastplate = new BasicBreastplate(true);
         Armour basicGauntlet = new BasicGauntlet(true);
@@ -39,8 +39,8 @@ public class Humans extends Sprite implements Commons, Inventory{
         setDefense(boots, breastplate, gauntlet, helmet, pants);
         this.money = 0;
         setImage(human);
-        setX(xPos);
-        setY(yPos);
+        setX(pos[x]);
+        setY(pos[y]);
     }
 
     /****************************************************************
