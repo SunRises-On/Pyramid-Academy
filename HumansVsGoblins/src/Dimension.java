@@ -45,20 +45,11 @@ public class Dimension extends Sprite implements Commons{
 
         return true;
     }
-    public boolean setIndex (int[] pos){
+    public boolean setIndex (int[] pos, Character image){
         int x = pos[0];
         int y = pos[1];
         int i = 0;
-        for(List<Character> inner : screen){
-            //we are in the right row
-            if(i == y-1){
-                //goblin is inside
-                if(x == inner.indexOf("g")){
-                    return false;
-                }
-            }
-            ++i;
-        }
+        screen.get(y).set(x, image);
         return true;
     }
 }
