@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Dimension extends Sprite implements Commons{
     //two dimensional array
-    protected List<List<String>> screen ;
-    protected List<String> row;
+    protected List<List<Character>> screen ;
+    protected List<Character> row;
     public Dimension(){
-        screen = new ArrayList<List<String>>();
-        row = new ArrayList<String>();
+        screen = new ArrayList<List<Character>>();
+        row = new ArrayList<Character>();
         x = BOARD_WIDTH;
         y = BOARD_HEIGHT;
         //add space to row
         for(int i = 0 ; i < x  ; ++i){
-            row.add("0");
+            row.add('0');
         }
         //add rows
         for(int i = 0; i <y ; ++i){
@@ -23,10 +23,43 @@ public class Dimension extends Sprite implements Commons{
     }
 
     public void printDimension(){
-        for(List<String> inner : screen){
+        for(List<Character> inner : screen){
             String format = Arrays.toString(inner.toArray()).replace(",","").replace("[","").replace("]","");
             System.out.println(format);
         }
+    }
+    public boolean isFree(int[] pos){
+        int x = pos[0];
+        int y = pos[1];
+        int i = 0;
+        if(x >= BOARD_WIDTH || y>= BOARD_HEIGHT){
+           //throw an exception
+        }
+        if(x < 0 || y < 0){
+            //throw an exception
+        }
+        Character c = screen.get(x).get(y);
+        if(c != '0'){
+            return false;
+        }
+
+        return true;
+    }
+    public boolean setIndex (int[] pos){
+        int x = pos[0];
+        int y = pos[1];
+        int i = 0;
+        for(List<Character> inner : screen){
+            //we are in the right row
+            if(i == y-1){
+                //goblin is inside
+                if(x == inner.indexOf("g")){
+                    return false;
+                }
+            }
+            ++i;
+        }
+        return true;
     }
 }
 
