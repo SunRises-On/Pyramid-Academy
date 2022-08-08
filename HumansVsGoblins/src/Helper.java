@@ -1,5 +1,5 @@
 import java.util.Random;
-
+//Helper function contains game logic.
 public class Helper implements Commons {
     //If board position is not occupied. Starter position is valid
     public static int[] starterPosition (Dimension dimension){

@@ -54,6 +54,9 @@ public class Dimension extends Sprite implements Commons{
 
         return c;
     }
+    public void setIndexBlank (int[] pos){
+        setIndex(pos, this.fill);
+    }
 }
 
 

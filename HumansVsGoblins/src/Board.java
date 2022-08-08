@@ -9,7 +9,7 @@ public class Board implements  Commons{
 
     private int deaths = 0;
 
-    private boolean playing = true;
+    private boolean inGame = true;
     private boolean haveWon = true;
 
     public Board(){
@@ -35,5 +35,30 @@ public class Board implements  Commons{
         d.printDimension();
         System.exit(1);
 
+    }
+    public void drawGoblins(){
+        for(Goblins goblin  : goblins){
+            if(goblin.getIsDead()){
+                int[] arr = new int[]{2};
+                arr[0] = goblin.getX();
+                arr[1] = goblin.getY();
+                d.setIndexBlank(arr);
+                goblins.remove(goblin);
+            }
+        }
+    }
+    public void drawPlayer(){
+        if (humans.getIsVisible()){
+            int[] arr = new int[]{2};
+            arr[0] = humans.getX();
+            arr[1] = humans.getY();
+            d.setIndex(arr, humans.getImage());
+        }
+        if(humans.getIsDead()){
+            humans.die();
+            haveWon = false;
+            inGame = false;
+
+        }
     }
 }
