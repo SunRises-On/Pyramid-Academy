@@ -10,7 +10,7 @@ public class BasicBreastplate implements Armour {
     BasicBreastplate(){
         this.name = "Basic Breastplate";
         this.description = "Won't protect much.";
-        this.defense = 2;
+        this.defense =  3;
         this.isWorn = false;
     }
     public BasicBreastplate(Boolean changeIsWorn){

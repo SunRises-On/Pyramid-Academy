@@ -40,4 +40,8 @@ public class Sprite {
     public boolean getIsDead(){
         return isDead;
     }
+    public int[] getPos() {
+        int[] arr = new int[]{this.x, this.y};
+        return arr;
+    }
 }

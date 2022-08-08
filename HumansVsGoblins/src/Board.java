@@ -42,9 +42,7 @@ public class Board implements  Commons{
     public void drawGoblins(){
         d.printDimension();
         for(Goblins goblin  : goblins){
-            int[] arr = new int[]{1,1};
-            arr[0] = goblin.getX();
-            arr[1] = goblin.getY();
+            int[] arr = goblin.getPos();
 
             if(goblin.getIsVisible()){
                 d.setIndex(arr, goblin.getImage());
@@ -61,9 +59,7 @@ public class Board implements  Commons{
         d.printDimension();
         System.out.println();
         if (humans.getIsVisible()){
-            int[] arr = new int[]{1,1};
-            arr[0] = humans.getX();
-            arr[1] = humans.getY();
+            int[] arr = humans.getPos();
             System.out.println("Array[0] = " + arr[0] + " Array[1] = " + arr[1]);
             d.setIndex(arr, humans.getImage());
         }
@@ -88,9 +84,7 @@ public class Board implements  Commons{
     //Get user input, verify the input. Check if space is useful.
     public void humansMovement(Scanner sc){
         char c = 'a';
-        int[] arr = new int[]{1,1};
-        arr[0] = humans.getX();
-        arr[1] = humans.getY();
+        int[] arr = humans.getPos();
         System.out.println("Input N,S,W, or E to move.");
         try{
             c = sc.next().charAt(0);//get next char
@@ -113,6 +107,10 @@ public class Board implements  Commons{
         d.setIndexBlank(arr); //set old human position to blank;
 
     }
+    //Check if space contains goblin
+    public void colliderHuman(){
+        int[] arr = humans.getPos();
+    }
     public void animationCycle(Scanner sc){
         if (deaths == NUMBER_OF_GOBLINS){
             inGame = false;
@@ -121,6 +119,7 @@ public class Board implements  Commons{
         d.printDimension();
         System.out.println("We are in animatinCycle.");
         humansMovement(sc);
+        colliderHuman();
         //check if space contains goblin
         // if it contains goblin do combat
         //combat uses goblin health,attack
