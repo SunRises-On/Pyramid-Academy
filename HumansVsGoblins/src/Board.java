@@ -61,4 +61,51 @@ public class Board implements  Commons{
 
         }
     }
+    public void gameOver(){
+        if(haveWon){
+            System.out.println("You have won");
+        }else{
+            System.out.println("You lost.");
+        }
+        System.out.println("Do you want to play again?");
+    }
+    public void humansMovement(){
+        //get input
+        //check if input is useful
+        //if useful set space to blank
+        //set human to new position
+
+        //check if space contains goblin
+        // if it contains goblin do combat
+        //combat uses goblin health,attack
+        //human attack, defense, health
+        // do set visible and set dead
+        //for goblin and human
+    }
+    public void animationCycle(){
+        if (deaths == NUMBER_OF_GOBLINS){
+            inGame = false;
+            System.out.println("You have defeated the goblins!");
+        }
+        d.printDimension();
+        humansMovement();
+
+
+    }
+    public void paint(){
+        if(inGame){
+            drawGoblins();
+            drawPlayer();
+        }
+    }
+
+    public void run(){
+        
+        while(inGame){
+            paint();
+            animationCycle();
+        }
+        gameOver();
+    }
+
 }
