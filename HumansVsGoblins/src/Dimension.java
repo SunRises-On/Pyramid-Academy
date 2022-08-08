@@ -39,11 +39,17 @@ public class Dimension extends Sprite implements Commons{
 
         return false;
     }
-    public void setIndex (int[] pos, Character image){
-        int rowSet = pos[0]; // x
-        int column = pos[1]; // y
-
+    public void setIndex (int[] posNew, Character imageNew){
+        int rowSet = posNew[0]; // x
+        int column = posNew[1]; // y
+        Character image = imageNew;
+        System.out.println("In dimension pos[0] = " + posNew[0] + " pos[1] = " +posNew[1]);
+        System.out.println("rowSet = " + rowSet + " column = " + column);
+        printDimension();
+        System.out.println();
        screen.get(rowSet).set(column, image);
+       printDimension();
+       System.out.println();
     }
 
     public Character getIndexImage(int[] pos){

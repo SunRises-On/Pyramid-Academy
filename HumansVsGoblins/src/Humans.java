@@ -39,8 +39,8 @@ public class Humans extends Sprite implements Commons, Inventory{
         setDefense(boots, breastplate, gauntlet, helmet, pants);
         this.money = 0;
         setImage(human);
-        setX(pos[x]);
-        setY(pos[y]);
+        setX(pos[0]);
+        setY(pos[1]);
     }
 
     /****************************************************************
@@ -49,28 +49,28 @@ public class Humans extends Sprite implements Commons, Inventory{
      *
      ****************************************************************/
     public void act(char c){
-        if(c == 'N'){ //y axis
+        if(c == 'N'){ //y-axis, the graph is flipped this.x = y-axis
+            x -= 1;
+            if( x < 0){
+                x = 0;
+            }
+        }
+        else if (c == 'S'){
+            x += 1;
+            if( x >= BOARD_HEIGHT-1) {
+                x = BOARD_HEIGHT - 1;
+            }
+        }
+        else if (c == 'E'){ // x axis, this.y = x-axis
             y += 1;
             if( y >= BOARD_WIDTH-1){
                 y = BOARD_WIDTH-1;
             }
         }
-        else if (c == 'S'){
-            y -= 1;
-            if( y <= 1){
-                y = 1;
-            }
-        }
-        else if (c == 'E'){ // x axis
-            x += 1;
-            if( x >= BOARD_WIDTH-1){
-                x = BOARD_WIDTH-1;
-            }
-        }
         else if (c == 'W'){
-            x -= 1;
-            if ( x <= 1){
-                x = 1;
+            y -= 1;
+            if ( y < 0){
+                y = 0;
             }
         }
 
