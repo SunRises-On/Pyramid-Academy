@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Board implements  Commons{
     private List<Goblins> goblins = new ArrayList<>();
@@ -61,35 +62,36 @@ public class Board implements  Commons{
 
         }
     }
-    public void gameOver(){
+    public void gameOver(Scanner sc){
         if(haveWon){
             System.out.println("You have won");
         }else{
             System.out.println("You lost.");
         }
-        System.out.println("Do you want to play again?");
+        System.out.println("Do you want to play again?(Yes or No)");
+
     }
-    public void humansMovement(){
+    public void humansMovement(Scanner sc){
         //get input
         //check if input is useful
         //if useful set space to blank
         //set human to new position
 
+
+    }
+    public void animationCycle(Scanner sc){
+        if (deaths == NUMBER_OF_GOBLINS){
+            inGame = false;
+            System.out.println("You have defeated the goblins!");
+        }
+        d.printDimension();
+        humansMovement(sc);
         //check if space contains goblin
         // if it contains goblin do combat
         //combat uses goblin health,attack
         //human attack, defense, health
         // do set visible and set dead
         //for goblin and human
-    }
-    public void animationCycle(){
-        if (deaths == NUMBER_OF_GOBLINS){
-            inGame = false;
-            System.out.println("You have defeated the goblins!");
-        }
-        d.printDimension();
-        humansMovement();
-
 
     }
     public void paint(){
@@ -100,12 +102,12 @@ public class Board implements  Commons{
     }
 
     public void run(){
-        
+        Scanner sc = new Scanner(System.in);
         while(inGame){
             paint();
-            animationCycle();
+            animationCycle(sc);
         }
-        gameOver();
+        gameOver(sc);
     }
 
 }
