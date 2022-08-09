@@ -123,7 +123,7 @@ public class Board implements  Commons{
             }
         }
 
-        if( !goblins.get(index).getIsDead() || !humans.getIsDead()){
+        if( !goblins.get(index).getIsDead() && !humans.getIsDead()){
             combat();
         }
     }
