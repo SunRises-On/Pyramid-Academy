@@ -10,15 +10,14 @@ public class Helper implements Commons {
             position[0] = getRandomNum(0,BOARD_WIDTH-1); //x rows
             position[1] = getRandomNum(0,BOARD_HEIGHT-1); //y columns
             boolean isClear = dimension.isFree(position);
-            if(isClear == true) {break;}
+            if(isClear) {break;}
         }
         return position;
     }
     public static int getRandomNum(int min, int max){
 
         Random rand = new Random();
-        int randomNum = min + rand.nextInt((max - min) + 1); //nextInt is better than nextDouble
-        return randomNum;
+        return min + rand.nextInt((max - min) + 1);
     }
 
     public static int getGoblinIndexAtPos(List<Goblins> goblinsList , int[] pos){

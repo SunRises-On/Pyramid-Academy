@@ -1,6 +1,6 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+//Not implemented yet.
 public interface Inventory {
    // int maxWeight = 0;
     //holds all money

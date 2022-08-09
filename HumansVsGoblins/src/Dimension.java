@@ -6,13 +6,12 @@ public class Dimension extends Sprite implements Commons{
     //two dimensional array
     protected List<List<Character>> screen ;
     protected List<Character> row;
-    private Character fill;
+    private final Character fill = '_';
     public Dimension(){
         screen = new ArrayList<List<Character>>();
 
         x = BOARD_WIDTH;
         y = BOARD_HEIGHT;
-        this.fill = '_';
         //Have to initialize each index
         for(int i = 0 ; i < x  ; ++i) {
             row = new ArrayList<>();

@@ -12,7 +12,7 @@ public class Goblins extends Sprite{
         //this.loot = new Loot();
         setImage(goblin);
         this.health = 6;
-        this.attack = 10;
+        this.attack = 1;
 
     }
     public int getHealth(){
