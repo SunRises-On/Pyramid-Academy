@@ -40,39 +40,52 @@ public class Helper implements Commons {
     }
     public static void handleGoblinAttack(int index, List<Goblins> goblins, Humans humans){
 
+        int min = 1;
+        int max = 10;
+        int attackMultiplier = getRandomNum(min, max);
+
         int def = humans.getDefense();
         int hp = humans.getHealth();
-        int attack = goblins.get(index).getAttack();
+        int atk = goblins.get(index).getAttack() ;
+        atk *= attackMultiplier; //multiple goblin attack by multipler
 
-        System.out.println("Goblin tries attacks with " + attack + " damage.");
-        attack -= def;
-        if(attack > 0){
-            System.out.println("Goblin attacks with " + attack +" damage.");
-            hp -= attack;
+        System.out.println("Goblin tries Clobber!");
+        atk -= def;
+        if(atk > 0){
+            hp -= atk;
             humans.setHealth(hp);
             if(humans.getHealth() < 0){
+                System.out.println("Goblin hits for " + atk +" Atk.");
                 System.out.println("You are dead.");
                 Helper.setSpriteDead(humans);
             }else{
-                System.out.println("Health = "+hp + ".");
+                System.out.println("Goblin hits for " + atk +" Atk. You have "+ hp +" HP left.");
             }
         }else{
             System.out.println("Goblin attack fails!");
         }
+        System.out.println();
     }
     public static void handleHumanAttack(int index, List<Goblins> goblins, Humans humans){
-        int attack = humans.getAttack();
-        int hp = goblins.get(index).getHealth();
 
-        hp -= attack;
+        int min = 1;
+        int max = 3;
+        int attackMultiplier = getRandomNum(min, max);
+
+        int atk = humans.getAttack();
+        int hp = goblins.get(index).getHealth();
+        atk *= attackMultiplier;
+
+        hp -= atk;
         goblins.get(index).setHealth(hp);
         if( hp <= 0){
-            System.out.println("You attack with " + attack + " damage. Goblin dies.");
+            System.out.println("You hit for " + atk + " Atk. Goblin dies.");
             Helper.setSpriteDead(goblins.get(index));
         }else{
-            System.out.println("You attack with " + attack + " Damage. Goblin has "+ hp +" HP left.");
+            System.out.println("You hit for " + atk + " Atk. Goblin has "+ hp +" HP left.");
 
         }
+        System.out.println();
     }
 
 }

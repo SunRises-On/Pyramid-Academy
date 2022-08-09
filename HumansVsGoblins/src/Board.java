@@ -142,11 +142,14 @@ public class Board implements  Commons{
         }
     }
     public void isPlayerInGame (){
-        System.out.println("Deaths = "+deaths);
-        System.out.println("Number of goblins = "+ NUMBER_OF_GOBLINS);
+
         if (deaths == NUMBER_OF_GOBLINS){
             inGame = false;
             System.out.println("You have defeated the goblins!");
+        }
+        if(humans.getIsDead()){
+            inGame = false;
+            haveWon = false;
         }
     }
     public void paint(){
