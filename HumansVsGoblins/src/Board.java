@@ -72,7 +72,6 @@ public class Board implements  Commons{
             System.out.println("You lost.");
             System.exit(3);
         }
-        System.out.println("Do you want to play again?(Yes or No)");
 
     }
     //Get user input, verify the input. Check if space is useful.
