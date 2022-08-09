@@ -9,7 +9,7 @@ public class Dimension extends Sprite implements Commons{
     private Character fill;
     public Dimension(){
         screen = new ArrayList<List<Character>>();
-       // row = new ArrayList<Character>();
+
         x = BOARD_WIDTH;
         y = BOARD_HEIGHT;
         this.fill = '_';
@@ -43,20 +43,15 @@ public class Dimension extends Sprite implements Commons{
         int rowSet = posNew[0]; // x
         int column = posNew[1]; // y
         Character image = imageNew;
-        System.out.println("In dimension pos[0] = " + posNew[0] + " pos[1] = " +posNew[1]);
-        System.out.println("rowSet = " + rowSet + " column = " + column);
-        printDimension();
-        System.out.println();
+
        screen.get(rowSet).set(column, image);
-       printDimension();
-       System.out.println();
     }
 
     public Character getIndexImage(int[] pos){
         int rowSet = pos[0]; // x
         int column = pos[1]; // y
         Character c = ' ';
-        c = screen.get(column).get(rowSet);
+        c = screen.get(rowSet).get(column);
 
         return c;
     }

@@ -44,4 +44,5 @@ public class Sprite {
         int[] arr = new int[]{this.x, this.y};
         return arr;
     }
+
 }

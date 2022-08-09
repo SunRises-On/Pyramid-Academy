@@ -7,14 +7,15 @@ public class BasicGauntlet implements Armour {
     private String description;
     private int defense;
     private Boolean isWorn;
-    BasicGauntlet(){
+    public BasicGauntlet(){
         this.name = "Basic Gauntlet";
         this.description = "It's okay.";
         this.defense = 1;
         this.isWorn = false;
     }
     public BasicGauntlet(Boolean changeIsWorn){
-        this.isWorn = true;
+        this();
+        this.isWorn = changeIsWorn;
     }
 
     public int getDefense() {

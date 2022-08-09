@@ -7,14 +7,16 @@ public class BasicPants implements Armour {
     private String description;
     private int defense;
     private Boolean isWorn;
-    BasicPants(){
+    public BasicPants(){
         this.name = "Basic Pants";
         this.description = "Better than nothing.";
         this.defense = 1;
         this.isWorn = false;
     }
     public BasicPants(Boolean changeIsWorn){
-        this.isWorn = true;
+        this();
+        this.isWorn = changeIsWorn;
+
     }
 
     public int getDefense() {

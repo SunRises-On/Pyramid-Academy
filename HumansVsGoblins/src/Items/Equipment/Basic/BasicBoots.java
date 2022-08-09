@@ -13,8 +13,10 @@ public class BasicBoots implements Armour {
         this.defense = 1;
         this.isWorn = false;
     }
+
     public BasicBoots(Boolean changeIsWorn){
-        this.isWorn = true;
+        this();
+        this.isWorn = changeIsWorn;
     }
 
     public void setWorn(Boolean worn) {

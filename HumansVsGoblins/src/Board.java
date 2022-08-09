@@ -18,12 +18,9 @@ public class Board implements  Commons{
         gameInit();
     }
     public void gameInit(){
-        //initalize players and goblins
         goblins = new ArrayList<>();
         for(int i = 0; i <= NUMBER_OF_GOBLINS ; ++i){
-            d.printDimension();
-            int[] pos = new int[]{0,0};
-            pos = Helper.starterPosition(d);
+            int[] pos = Helper.starterPosition(d);
             if (i == 0){
                 humans = new Humans(pos);
                 d.setIndex(pos, humans.getImage());
@@ -34,56 +31,48 @@ public class Board implements  Commons{
                 d.setIndex(pos, g.getImage());
             }
         }
-      //  d.printDimension();
-       // System.exit(1);
         run();
-
     }
     public void drawGoblins(){
-        d.printDimension();
-        for(Goblins goblin  : goblins){
-            int[] arr = goblin.getPos();
+        for(Goblins g  : goblins){
+            int[] arr = g.getPos();
 
-            if(goblin.getIsVisible()){
-                d.setIndex(arr, goblin.getImage());
+            if(g.getIsVisible()){
+                d.setIndex(arr, g.getImage());
             }
-            if(goblin.getIsDead()){
-
+            if(g.getIsDead()){
                 d.setIndexBlank(arr);
-                goblins.remove(goblin);
+                goblins.remove(g);
+                break;
             }
         }
     }
     public void drawPlayer(){
-        System.out.println("we are in draw player");
-        d.printDimension();
-        System.out.println();
+
         if (humans.getIsVisible()){
             int[] arr = humans.getPos();
-            System.out.println("Array[0] = " + arr[0] + " Array[1] = " + arr[1]);
             d.setIndex(arr, humans.getImage());
         }
         if(humans.getIsDead()){
             humans.die();
             haveWon = false;
             inGame = false;
-
         }
-        d.printDimension();
-        System.out.println("We are leaving drawPlayer");
     }
     public void gameOver(Scanner sc){
         if(haveWon){
             System.out.println("You have won");
+            System.exit(2);
         }else{
             System.out.println("You lost.");
+            System.exit(3);
         }
         System.out.println("Do you want to play again?(Yes or No)");
 
     }
     //Get user input, verify the input. Check if space is useful.
     public void humansMovement(Scanner sc){
-        char c = 'a';
+        char c;
         int[] arr = humans.getPos();
         System.out.println("Input N,S,W, or E to move.");
         try{
@@ -108,34 +97,61 @@ public class Board implements  Commons{
 
     }
     //Check if space contains goblin
-    public void colliderHuman(){
+    public boolean startCombat(){
         int[] arr = humans.getPos();
+        boolean isFree = d.isFree(arr);
+        Character c = goblins.get(0).getImage();
+        if(!isFree){
+            Character charFind = d.getIndexImage(arr);
+            if(charFind == c){
+                return true;
+            }
+        }
+        return false;
     }
+    //Do combat, combat uses math.random differently for human and goblin
+    public void combat(){
+        int[] arr = humans.getPos();
+        int index = Helper.getGoblinIndexAtPos(goblins, arr);
+
+        Helper.handleGoblinAttack(index, goblins, humans);
+
+        if( !humans.getIsDead()){
+            Helper.handleHumanAttack(index, goblins, humans);
+            if(goblins.get(index).getIsDead()){
+                deaths++;
+            }
+        }
+
+        if( !goblins.get(index).getIsDead() || !humans.getIsDead()){
+            combat();
+        }
+    }
+
     public void animationCycle(Scanner sc){
+        boolean collision;
+
+        d.printDimension();
+
+        humansMovement(sc);
+
+        collision = startCombat();
+
+        if(collision){
+            combat();
+        }
+    }
+    public void isPlayerInGame (){
+        System.out.println("Deaths = "+deaths);
+        System.out.println("Number of goblins = "+ NUMBER_OF_GOBLINS);
         if (deaths == NUMBER_OF_GOBLINS){
             inGame = false;
             System.out.println("You have defeated the goblins!");
         }
-        d.printDimension();
-        System.out.println("We are in animatinCycle.");
-        humansMovement(sc);
-        colliderHuman();
-        //check if space contains goblin
-        // if it contains goblin do combat
-        //combat uses goblin health,attack
-        //human attack, defense, health
-        // do set visible and set dead
-        //for goblin and human
-
     }
     public void paint(){
-        if(inGame){
-            drawGoblins();
-            drawPlayer();
-
-            d.printDimension();
-            System.out.println("We are leaving paint");
-        }
+        drawGoblins();
+        drawPlayer();
     }
 
     public void run(){
@@ -143,8 +159,9 @@ public class Board implements  Commons{
         while(inGame){
             paint();
             animationCycle(sc);
+            isPlayerInGame();
         }
         gameOver(sc);
-    }
 
+    }
 }

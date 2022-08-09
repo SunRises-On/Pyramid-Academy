@@ -13,8 +13,9 @@ public class BasicSword implements Weapon {
         this.attack = 5;
         this.isWorn = false;
     }
-    public BasicSword(Boolean isWorn){
-        this.isWorn = true;
+    public BasicSword(Boolean changeIsWorn){
+        this();
+        this.isWorn = changeIsWorn;
     }
     public void setWorn(Boolean worn) {
         isWorn = worn;

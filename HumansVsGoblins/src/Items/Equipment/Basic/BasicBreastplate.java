@@ -7,14 +7,15 @@ public class BasicBreastplate implements Armour {
     private String description;
     private int defense;
     private Boolean isWorn;
-    BasicBreastplate(){
+    public BasicBreastplate(){
         this.name = "Basic Breastplate";
         this.description = "Won't protect much.";
         this.defense =  3;
         this.isWorn = false;
     }
     public BasicBreastplate(Boolean changeIsWorn){
-        this.isWorn = true;
+        this();
+        this.isWorn = changeIsWorn;
     }
 
     public int getDefense() {

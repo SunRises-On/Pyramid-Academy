@@ -1,4 +1,3 @@
-import Items.*;
 import Items.Equipment.*;
 import Items.Equipment.Basic.*;
 
@@ -18,11 +17,11 @@ public class Humans extends Sprite implements Commons, Inventory{
     private int attack;
     private int defense;
     private final Character human = 'h';
-    Humans(){
+    Humans(Armour boots){
 
     }
     Humans(int[] pos){
-        Armour basicBoots = new BasicBoots(true);
+        Armour basicBoots =  new BasicBoots(true);
         Armour basicBreastplate = new BasicBreastplate(true);
         Armour basicGauntlet = new BasicGauntlet(true);
         Armour basicHelmet = new BasicHelmet(true);
@@ -100,6 +99,7 @@ public class Humans extends Sprite implements Commons, Inventory{
     public void setDefense(Armour getBoots, Armour getBreastplate, Armour getGauntlet, Armour getHelmet, Armour getPants){
         this.defense = getBoots.getDefense() + getBreastplate.getDefense() + getGauntlet.getDefense() + getHelmet.getDefense() + getPants.getDefense();
     }
+
     public void setAttack(Weapon weapon){
             this.attack = weapon.getAttack();
     }

@@ -7,14 +7,15 @@ public class BasicHelmet implements Armour {
     private String description;
     private int defense;
     private Boolean isWorn;
-    BasicHelmet(){
+    public BasicHelmet(){
         this.name = "Basic Helmet";
         this.description = "Won't protect much.";
         this.defense = 1;
         this.isWorn = false;
     }
     public BasicHelmet(Boolean changeIsWorn){
-        this.isWorn = true;
+        this();
+        this.isWorn = changeIsWorn;
     }
 
     public int getDefense() {
