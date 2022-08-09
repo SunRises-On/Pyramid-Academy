@@ -25,4 +25,8 @@ public class Goblins extends Sprite{
     public void setHealth(int h){
         this.health = h;
     }
+    @Override
+    public String toString(){
+        return "Goblin's health = "+health+" attack = "+ attack + ".";
+    }
 }

@@ -24,11 +24,15 @@ public class Board implements  Commons{
             if (i == 0){
                 humans = new Humans(pos);
                 d.setIndex(pos, humans.getImage());
+                System.out.println(humans.toString());
             }
             else{
                 Goblins g = new Goblins(pos);
                 goblins.add(g);
                 d.setIndex(pos, g.getImage());
+                if(i == 1) {
+                    System.out.println("Basic goblin stats. " + g.toString());
+                }
             }
         }
         run();
@@ -60,6 +64,7 @@ public class Board implements  Commons{
         }
     }
     public void gameOver(Scanner sc){
+        sc.close();
         if(haveWon){
             System.out.println("You have won");
             System.exit(2);
@@ -74,13 +79,13 @@ public class Board implements  Commons{
     public void humansMovement(Scanner sc){
         char c;
         int[] arr = humans.getPos();
-        System.out.println("Input N,S,W, or E to move.");
+        System.out.println("Input n,s,w, or e to move.");
         try{
             c = sc.next().charAt(0);//get next char
             switch(c){
-                case 'N','S','W','E' -> humans.act(c);
+                case 'n','s','w','e' -> humans.act(c);
                 default -> {
-                    System.out.println("Only input : N,S,W,or E.");
+                    System.out.println("Only input : n,s,w,or e.");
                     humansMovement(sc);
                 }
             }

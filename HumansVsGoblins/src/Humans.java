@@ -41,25 +41,25 @@ public class Humans extends Sprite implements Commons, Inventory{
     }
 
     public void act(char c){
-        if(c == 'N'){ //y-axis, the graph is flipped this.x = y-axis
+        if(c == 'n'){ //y-axis, the graph is flipped this.x = y-axis
             x -= 1;
             if( x < 0){
                 x = 0;
             }
         }
-        else if (c == 'S'){
+        else if (c == 's'){
             x += 1;
             if( x >= BOARD_HEIGHT-1) {
                 x = BOARD_HEIGHT - 1;
             }
         }
-        else if (c == 'E'){ // x axis, this.y = x-axis
+        else if (c == 'e'){ // x axis, this.y = x-axis
             y += 1;
             if( y >= BOARD_WIDTH-1){
                 y = BOARD_WIDTH-1;
             }
         }
-        else if (c == 'W'){
+        else if (c == 'w'){
             y -= 1;
             if ( y < 0){
                 y = 0;
@@ -97,5 +97,9 @@ public class Humans extends Sprite implements Commons, Inventory{
     //add item to inventory
     public ArrayList<Object> addItem(ArrayList<Object> inventory, Object obj){
         return null;
+    }
+    @Override
+    public String toString(){
+        return "Human's health = "+health+" attack = "+ attack + " defense = " + defense + ".";
     }
 }
