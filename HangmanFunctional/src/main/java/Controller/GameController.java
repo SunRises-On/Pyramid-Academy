@@ -60,10 +60,10 @@ public class GameController {
     public void getText(ActionEvent event)throws IOException{
         String guessC = text.getText();
 
-        Boolean[] hitOrMiss = new Boolean[2];
-        hitOrMiss = model.getAction(guessC);
-        Boolean hit = hitOrMiss[0];
-        Boolean duplicate = hitOrMiss[1];
+        Boolean[] hitAndDup = new Boolean[2];
+        hitAndDup = model.getAction(guessC);
+        Boolean hit = hitAndDup[0];
+        Boolean duplicate = hitAndDup[1];
         if(hit && !duplicate){
             //update user view word
             updateLabelViewWord();

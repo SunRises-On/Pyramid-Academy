@@ -5,8 +5,6 @@ import Model.*;
 
 public class Game {
     public GameModel gameRender;
-    private String gameGuess;
-
     public ArrayList<String> screen;
     public Boolean isDone;
     public Word word;
@@ -14,7 +12,6 @@ public class Game {
 
     public Game(GameModel render){
         gameRender = render;
-        gameGuess = "";
         Scan scanFile = new Scan();
         //get hangman new word
         String str = scanFile.scanWordFile();
@@ -25,40 +22,46 @@ public class Game {
         int letterNum = word.getStr().length();
     }
 
-
-    public void setGameGuess(String gameGuess) {
-        this.gameGuess = gameGuess;
-    }
-
-    public Boolean hitOrMiss( String str){
+    public Boolean[] hitOrMiss( String str){
         Boolean isHit = false;
         Boolean isLetter = false;
         Boolean isDuplicate = false;
+        Boolean[] hitAndDup = new Boolean[2];
 
         isLetter = verifyStr(str);
 
         if(isLetter){
             //change to letter
-            String letter = str.substring(0,1);
-            //isHit =
+            String letter = str.substring(0,1).toLowerCase();
 
-            //isDuplicate =
+            isHit = word.checkForHit(letter);
 
-            //if hit and duplicate, isHit = false
-            if(isHit && isDuplicate){
+            isDuplicate = word.checkForDuplicate(letter);
+
+            if(!isHit && !isDuplicate){
+                //update Enum miss
+                miss.next();
+                //update word.mistakeList
+            }
+            else if(isHit && isDuplicate){
                 isHit = false;
-            }else{
+            }else if (isHit && !isDuplicate){
                 //update word.addLetterHit()
                 word.addLetterHit(letter);
                 //update word.userView of hangman word
             }
         }
 
-
-        return isHit;
+        hitAndDup[0] = isHit;
+        hitAndDup[1] = isDuplicate;
+        return hitAndDup;
     }
     public Boolean verifyStr( String str){
-
-        return false;
+        char c = str.charAt(0);
+        return ( c >= 'a' && c<= 'z') || (c >= 'A' && c<= 'Z');
     }
+    public int getMissIndex(){
+        return miss.value;
+    }
+
 }

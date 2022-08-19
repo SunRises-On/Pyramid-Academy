@@ -18,21 +18,18 @@ public class GameModel {
 
     }
     //get action hit or miss
-    public Boolean getAction(String s){
-        Boolean doAction = false;
-        doAction = game.hitOrMiss(s);
+    public Boolean[] getAction(String s){
 
-        return doAction;
+        Boolean[] hitAndDup = new Boolean[2];
+        hitAndDup = game.hitOrMiss(s);
+
+        return hitAndDup;
     }
-
-    //render to game logic
-    public void setGuessR(String guessR) {
-        this.guessR = guessR;
-        game.setGameGuess(guessR);
+    //get Game index
+    public int getMissIndex(){
+        return game.getMissIndex();
     }
     //get player action(buttons)
     //update all
     //message(String s)
-
-
 }
