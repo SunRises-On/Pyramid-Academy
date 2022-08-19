@@ -42,12 +42,12 @@ public class GameController {
     Boolean isOver;
     Boolean won;
     GameModel model;
-    private static final String hangmanOne= "com/example/HangmanFunctional/Hangman_1.png";
-    private static final String hangmanTwo = "com/example/HangmanFunctional/Hangman_2.png";
-    private static final String hangmanThree = "com/example/HangmanFunctional/Hangman_3.png";
-    private static final String hangmanFour = "com/example/HangmanFunctional/Hangman_4.png";
-    private static final String hangmanFive = "com/example/HangmanFunctional/Hangman_5.png";
-    private static final String hangmanSix = "com/example/HangmanFunctional/Hangman_6.png";
+    private static final String hangmanOne= "/Hangman_1.png";
+    private static final String hangmanTwo = "/Hangman_2.png";
+    private static final String hangmanThree = "/Hangman_3.png";
+    private static final String hangmanFour = "/Hangman_4.png";
+    private static final String hangmanFive = "/Hangman_5.png";
+    private static final String hangmanSix = "/Hangman_6.png";
 
     private Stage stage;
     private Scene scene;
@@ -96,8 +96,9 @@ public class GameController {
         }
         else{
             //not hit clear text
-            text.clear();
+
         }
+        text.clear();
 
         //check if game is over
        // checkIsGameOver();

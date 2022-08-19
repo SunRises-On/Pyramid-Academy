@@ -39,9 +39,10 @@ public class Word {
         return false;
     }
     public Boolean checkForDuplicate(String s){
-        if(correctList.contains(s)){
+        if(correctList.contains(s) || mistakeList.contains(s)){
             return true;
         }
+        
         return false;
     }
     public void addLetterHit( String s ){

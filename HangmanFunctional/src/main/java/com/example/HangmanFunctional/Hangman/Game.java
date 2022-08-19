@@ -40,7 +40,7 @@ public class Game {
             isHit = word.checkForHit(letter);
 
             isDuplicate = word.checkForDuplicate(letter);
-
+            System.out.println("Duplicate = "+isDuplicate);
             if(!isHit && !isDuplicate){
                 //update Enum miss
                 Miss newMiss = miss.next();
