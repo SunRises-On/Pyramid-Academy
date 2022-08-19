@@ -1,4 +1,4 @@
-package java;
+package Hangman;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,7 +24,7 @@ public class Scan {
             }
             scanner.close();
         }catch( FileNotFoundException e){
-            System.out.println("Word.txt file not found");
+            System.out.println("Hangman.Word.txt file not found");
         }
 
 
