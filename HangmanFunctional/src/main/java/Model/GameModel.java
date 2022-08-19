@@ -29,6 +29,9 @@ public class GameModel {
     public int getMissIndex(){
         return game.getMissIndex();
     }
+    public String getLastMiss(){
+        return game.getLastMiss();
+    }
     //get player action(buttons)
     //update all
     //message(String s)

@@ -42,6 +42,7 @@ public class Game {
                 //update Enum miss
                 miss.next();
                 //update word.mistakeList
+                word.addLetterMiss(letter);
             }
             else if(isHit && isDuplicate){
                 isHit = false;
@@ -49,6 +50,7 @@ public class Game {
                 //update word.addLetterHit()
                 word.addLetterHit(letter);
                 //update word.userView of hangman word
+                word.updateUserView(letter);
             }
         }
 
@@ -62,6 +64,9 @@ public class Game {
     }
     public int getMissIndex(){
         return miss.value;
+    }
+    public String getLastMiss(){
+        return word.getLastMiss();
     }
 
 }

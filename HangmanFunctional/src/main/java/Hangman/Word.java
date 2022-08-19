@@ -5,16 +5,24 @@ import java.util.List;
 
 public class Word {
     private String str;
+    private final char[] wordArr;
     private List<String> correctList;
     private List<String> mistakeList;
     private List<Character> userView;
 
     public Word(String newWord){
         this.str = newWord;
-        correctList = new ArrayList<>(str.length());
-        mistakeList = new ArrayList<>();
         int len = str.length();
+        wordArr = new char[len];
+        for(int i = 0 ; i< len ; i++){
+            wordArr[i] = str.charAt(i);
+        }
+        correctList = new ArrayList<>(len);
+        mistakeList = new ArrayList<>();
         userView = new ArrayList<>(len);
+        for(Character c : userView){
+            userView.add('_');
+        }
 
     }
     public String getStr(){
@@ -35,5 +43,26 @@ public class Word {
     }
     public void addLetterHit( String s ){
         correctList.add(s);
+    }
+    public void addLetterMiss( String s){
+        mistakeList.add(s);
+    }
+    /****************************************
+      Function will search for char position
+      in char[] of hangman word. When found
+      replace index with char
+      **************************************/
+    public void updateUserView( String s){
+        char l = s.charAt(0); /*convert to char*/
+        int index = 0;
+        for(char c : wordArr){
+            if(c == l){
+                userView.set(index,c);
+            }
+            index++;
+        }
+    }
+    public String getLastMiss(){
+        return mistakeList.get( mistakeList.size()-1);
     }
 }

@@ -91,8 +91,19 @@ public class GameController {
         }
 
     }
+    /*********************************************
+     * This function for every new miss
+     * will be called, and set new label to visible
+     * and set text to last miss
+     *********************************************/
+    public void updateLabelMiss(){
+        int index = model.getMissIndex();
+        String lastMiss = model.getLastMiss();
 
-    //updaate all
+        labels.get(index).setText(lastMiss);
+        labels.get(index).setVisible(true);
+    }
+    //    //updaate all
     // all buttons
     //messages?
 }
