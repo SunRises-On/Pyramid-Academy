@@ -42,7 +42,7 @@ public class Word {
         if(correctList.contains(s) || mistakeList.contains(s)){
             return true;
         }
-        
+
         return false;
     }
     public void addLetterHit( String s ){

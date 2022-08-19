@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -94,22 +95,30 @@ public class GameController {
             //we update hangman image
             changeHangmanImage();
         }
-        else{
-            //not hit clear text
-
-        }
         text.clear();
 
         //check if game is over
-       // checkIsGameOver();
-      //  if(isOver){
-        //    if(won){
+       // isOver =  model.checkIsGameOver();
+        //won = model.getWonOrLost();
+        isOver= true;
+        won = true;
+        if(isOver){
+            if(won){
                 //special won message
-         //   }else{
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setContentText("You Won!");
+                a.show();
+
+            }else{
                 //special lost message
-         //   }
+                Alert a2 = new Alert(Alert.AlertType.INFORMATION);
+                a2.setContentText("You Lost");
+                a2.show();
+
+
+            }
             //set score
-       // }
+        }
 
     }
     /*********************************************
