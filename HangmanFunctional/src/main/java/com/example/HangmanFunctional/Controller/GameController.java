@@ -1,5 +1,6 @@
-package Controller;
-import Model.*;
+package com.example.HangmanFunctional.Controller;
+
+import com.example.HangmanFunctional.Model.GameModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
@@ -16,8 +17,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameController {
-    @FXML
-    TextField text;
+   // @FXML
+   // TextField text;
     @FXML
     Label label_One;
     @FXML
@@ -34,17 +35,19 @@ public class GameController {
     Label label_word;
     @FXML
     ImageView image;
+    @FXML
+    TextField text;
     ArrayList<Label> labels;
     ArrayList<String> locations;
     Boolean isOver;
     Boolean won;
     GameModel model;
-    private static final String hangmanOne= "Hangman 1.png";
-    private static final String hangmanTwo = "Hangman 2.png";
-    private static final String hangmanThree = "Hangman 3.png";
-    private static final String hangmanFour = "Hangman 4.png";
-    private static final String hangmanFive = "Hangman 5.png";
-    private static final String hangmanSix = "Hangman 6.png";
+    private static final String hangmanOne= "com/example/HangmanFunctional/Hangman_1.png";
+    private static final String hangmanTwo = "com/example/HangmanFunctional/Hangman_2.png";
+    private static final String hangmanThree = "com/example/HangmanFunctional/Hangman_3.png";
+    private static final String hangmanFour = "com/example/HangmanFunctional/Hangman_4.png";
+    private static final String hangmanFive = "com/example/HangmanFunctional/Hangman_5.png";
+    private static final String hangmanSix = "com/example/HangmanFunctional/Hangman_6.png";
 
     private Stage stage;
     private Scene scene;
@@ -68,7 +71,9 @@ public class GameController {
             l.setVisible(false);
             l.setText("");
         }
+
     }
+    @FXML
     public void getText(ActionEvent event)throws IOException{
         String guessC = text.getText();
 
@@ -92,7 +97,7 @@ public class GameController {
         }
 
         //check if game is over
-        checkIsGameOver();
+       // checkIsGameOver();
         if(isOver){
             if(won){
                 //special won message
@@ -122,7 +127,13 @@ public class GameController {
     }
     public void updateWordLabel(){
         List<Character> word = model.getWord();
-        
+
+        StringBuilder sb = new StringBuilder();
+        for( Character ch : word){
+            sb.append(ch);
+        }
+        String s = sb.toString();
+        label_word.setText(s);
      }
     //    //updaate all
     // all buttons

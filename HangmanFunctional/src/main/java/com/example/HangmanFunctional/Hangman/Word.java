@@ -1,6 +1,5 @@
-package Hangman;
+package com.example.HangmanFunctional.Hangman;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 

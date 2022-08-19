@@ -1,4 +1,4 @@
-package Hangman;
+package com.example.HangmanFunctional.Hangman;
 //Miss, the value is the index value for miss
 // in GameController.
 

@@ -1,4 +1,4 @@
-package Controller;
+package com.example.HangmanFunctional.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

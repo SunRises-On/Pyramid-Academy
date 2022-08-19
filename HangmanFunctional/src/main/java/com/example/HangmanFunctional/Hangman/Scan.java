@@ -1,4 +1,4 @@
-package Hangman;
+package com.example.HangmanFunctional.Hangman;
 
 import java.io.File;
 import java.io.FileNotFoundException;

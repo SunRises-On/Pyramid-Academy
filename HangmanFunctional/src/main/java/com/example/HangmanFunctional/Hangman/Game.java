@@ -1,9 +1,10 @@
-package Hangman;
+package com.example.HangmanFunctional.Hangman;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Model.*;
+
+import com.example.HangmanFunctional.Model.GameModel;
 
 public class Game {
     public GameModel gameRender;

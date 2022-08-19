@@ -1,9 +1,9 @@
-package Model;
+package com.example.HangmanFunctional.Model;
 
-import Controller.GameController;
-import Hangman.*;
+
+import com.example.HangmanFunctional.Hangman.Game;
+
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class GameModel {

@@ -1,4 +1,4 @@
-package Controller;
+package com.example.HangmanFunctional.Controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +9,10 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+    private static final String scene3 = "/Game.fxml";
     @Override
     public void start(Stage primaryStage) throws IOException{
-       Parent root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
+       Parent root = FXMLLoader.load(getClass().getResource(scene3));
        primaryStage.setScene(new Scene(root));
        primaryStage.show();
 

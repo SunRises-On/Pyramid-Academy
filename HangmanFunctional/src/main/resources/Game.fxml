@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.HangmanFunctional.Controller.GameController">
+    <children>
+        <ImageView fx:id="image" fitHeight="326.0" fitWidth="568.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@com/example/HangmanFunctional/Hangman_Basic.png" />
+            </image>
+        </ImageView>
+        <AnchorPane layoutX="312.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <AnchorPane layoutY="100.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_Four" alignment="CENTER" layoutX="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0" text="D">
+                                    <font>
+                                        <Font name="Lucida Fax Demibold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="67.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_Five" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0" text="E">
+                                    <font>
+                                        <Font name="Lucida Fax Demibold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_Six" alignment="CENTER" prefHeight="100.0" prefWidth="66.0" text="F">
+                                    <font>
+                                        <Font name="Lucida Fax Demibold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+                <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_One" alignment="CENTER" layoutX="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0" text="A">
+                                    <font>
+                                        <Font name="System Bold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="61.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_Two" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0" text="B">
+                                    <font>
+                                        <Font name="System Bold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="133.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0">
+                            <children>
+                                <Label fx:id="label_Three" alignment="CENTER" layoutX="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="66.0" text="C">
+                                    <font>
+                                        <Font name="System Bold" size="48.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+        <Label fx:id="label_word" alignment="CENTER" layoutX="9.0" layoutY="258.0" prefHeight="68.0" prefWidth="470.0" text="H A N G M A N W O R D A B c d e">
+            <font>
+                <Font size="31.0" />
+            </font>
+        </Label>
+        <Label layoutX="111.0" layoutY="321.0" prefHeight="50.0" prefWidth="174.0" text="Guess A Letter : ">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <TextField fx:id="text" layoutX="300.0" layoutY="326.0" onAction="#getText" prefHeight="40.0" prefWidth="66.0" />
+    </children>
+</AnchorPane>
