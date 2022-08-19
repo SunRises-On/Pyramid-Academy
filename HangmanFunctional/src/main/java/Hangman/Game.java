@@ -1,6 +1,8 @@
 package Hangman;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import Model.*;
 
 public class Game {
@@ -67,6 +69,9 @@ public class Game {
     }
     public String getLastMiss(){
         return word.getLastMiss();
+    }
+    public List<Character> getWord(){
+        return word.getUserWord();
     }
 
 }

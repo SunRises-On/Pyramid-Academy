@@ -16,9 +16,11 @@ public enum Miss {
     private Miss(int value){
         this.value = value;
     }
-    //This method allows us to start the enum iteration
-    // over and get 1 from 8%7.
-    //this.ordinal() = the position of the constant
+    /**********************************************
+     This method allows us to start the enum iteration
+     over and get 1 from 8%7.
+     this.ordinal() = the position of the constant
+     *********************************************/
     public Miss next(){
         return vals[(this.ordinal()+1)%vals.length];
     }

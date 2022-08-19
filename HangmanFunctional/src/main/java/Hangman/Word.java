@@ -1,5 +1,6 @@
 package Hangman;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,5 +65,8 @@ public class Word {
     }
     public String getLastMiss(){
         return mistakeList.get( mistakeList.size()-1);
+    }
+    public List<Character> getUserWord(){
+        return userView;
     }
 }

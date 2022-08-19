@@ -6,12 +6,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class GameController {
     @FXML
@@ -33,9 +35,17 @@ public class GameController {
     @FXML
     ImageView image;
     ArrayList<Label> labels;
+    ArrayList<String> locations;
     Boolean isOver;
     Boolean won;
     GameModel model;
+    private static final String hangmanOne= "Hangman 1.png";
+    private static final String hangmanTwo = "Hangman 2.png";
+    private static final String hangmanThree = "Hangman 3.png";
+    private static final String hangmanFour = "Hangman 4.png";
+    private static final String hangmanFive = "Hangman 5.png";
+    private static final String hangmanSix = "Hangman 6.png";
+
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -48,8 +58,10 @@ public class GameController {
     @FXML
     void initialize()throws IOException{
         model = new GameModel();
-        //put labels into arraylist
+        locations = new ArrayList<>();
         labels = new ArrayList<>();
+        Collections.addAll(locations, hangmanOne, hangmanTwo, hangmanThree, hangmanFour, hangmanFive, hangmanSix);
+        //put labels into arraylist
         Collections.addAll(labels, label_One, label_Two, label_Three, label_Four, label_Five, label_Six);
         //all missing labels are NOT Visible at start
         for(Label l : labels){
@@ -66,13 +78,13 @@ public class GameController {
         Boolean duplicate = hitAndDup[1];
         if(hit && !duplicate){
             //update user view word
-            updateLabelViewWord();
+            updateWordLabel();
 
         }else if (!hit && !duplicate){
             //we update label with missed letter
             updateLabelMiss();
-            //we update hangman
-            updateHangmanMiss();
+            //we update hangman image
+            changeHangmanImage();
         }
         else{
             //not hit clear text
@@ -103,6 +115,15 @@ public class GameController {
         labels.get(index).setText(lastMiss);
         labels.get(index).setVisible(true);
     }
+    public void changeHangmanImage(){
+        int index = model.getMissIndex();
+        Image newImage = new Image(locations.get(index));
+         image.setImage(newImage);
+    }
+    public void updateWordLabel(){
+        List<Character> word = model.getWord();
+        
+     }
     //    //updaate all
     // all buttons
     //messages?

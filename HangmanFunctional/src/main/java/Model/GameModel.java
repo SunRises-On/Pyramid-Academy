@@ -2,14 +2,11 @@ package Model;
 
 import Controller.GameController;
 import Hangman.*;
-
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameModel {
-
-    String guessR;
-    int missR;
-
 
     public Game game;
 
@@ -31,6 +28,9 @@ public class GameModel {
     }
     public String getLastMiss(){
         return game.getLastMiss();
+    }
+    public List<Character> getWord(){
+        return game.getWord();
     }
     //get player action(buttons)
     //update all
