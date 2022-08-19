@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Word {
     private String str;
+    private final Character blank = '_';
     private final char[] wordArr;
     private List<String> correctList;
     private List<String> mistakeList;
@@ -20,9 +21,11 @@ public class Word {
         correctList = new ArrayList<>(len);
         mistakeList = new ArrayList<>();
         userView = new ArrayList<>(len);
-        for(Character c : userView){
-            userView.add('_');
+
+        for(char c : wordArr){
+            userView.add(blank);
         }
+
 
     }
     public String getStr(){
@@ -54,13 +57,23 @@ public class Word {
       **************************************/
     public void updateUserView( String s){
         char l = s.charAt(0); /*convert to char*/
+        Character letter = l;
         int index = 0;
-        for(char c : wordArr){
-            if(c == l){
+        for(Character c : wordArr){
+            if(c == letter){
                 userView.set(index,c);
             }
             index++;
         }
+    }
+    public String userViewToString(){
+
+        StringBuilder sb = new StringBuilder();
+        for( Character ch : userView){
+            sb.append(ch);
+        }
+        String s = sb.toString();
+        return s;
     }
     public String getLastMiss(){
         return mistakeList.get( mistakeList.size()-1);

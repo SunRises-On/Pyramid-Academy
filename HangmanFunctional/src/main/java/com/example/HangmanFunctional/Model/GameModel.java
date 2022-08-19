@@ -29,7 +29,7 @@ public class GameModel {
     public String getLastMiss(){
         return game.getLastMiss();
     }
-    public List<Character> getWord(){
+    public String getWord(){
         return game.getWord();
     }
     //get player action(buttons)

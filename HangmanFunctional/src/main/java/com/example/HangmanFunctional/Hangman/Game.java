@@ -43,7 +43,8 @@ public class Game {
 
             if(!isHit && !isDuplicate){
                 //update Enum miss
-                miss.next();
+                Miss newMiss = miss.next();
+                miss = newMiss;
                 //update word.mistakeList
                 word.addLetterMiss(letter);
             }
@@ -71,8 +72,8 @@ public class Game {
     public String getLastMiss(){
         return word.getLastMiss();
     }
-    public List<Character> getWord(){
-        return word.getUserWord();
+    public String getWord(){
+        return word.userViewToString();
     }
 
 }

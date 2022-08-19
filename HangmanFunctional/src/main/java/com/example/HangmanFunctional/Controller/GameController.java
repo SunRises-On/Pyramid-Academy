@@ -71,6 +71,9 @@ public class GameController {
             l.setVisible(false);
             l.setText("");
         }
+        label_word.setText("");
+        String s = model.getWord();
+        label_word.setText(s);
 
     }
     @FXML
@@ -98,14 +101,14 @@ public class GameController {
 
         //check if game is over
        // checkIsGameOver();
-        if(isOver){
-            if(won){
+      //  if(isOver){
+        //    if(won){
                 //special won message
-            }else{
+         //   }else{
                 //special lost message
-            }
+         //   }
             //set score
-        }
+       // }
 
     }
     /*********************************************
@@ -116,7 +119,7 @@ public class GameController {
     public void updateLabelMiss(){
         int index = model.getMissIndex();
         String lastMiss = model.getLastMiss();
-
+        System.out.println("Index = "+ index);
         labels.get(index).setText(lastMiss);
         labels.get(index).setVisible(true);
     }
@@ -126,13 +129,7 @@ public class GameController {
          image.setImage(newImage);
     }
     public void updateWordLabel(){
-        List<Character> word = model.getWord();
-
-        StringBuilder sb = new StringBuilder();
-        for( Character ch : word){
-            sb.append(ch);
-        }
-        String s = sb.toString();
+        String s = model.getWord();
         label_word.setText(s);
      }
     //    //updaate all
