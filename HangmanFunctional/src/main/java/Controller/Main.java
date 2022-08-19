@@ -1,6 +1,5 @@
-package com.example.hangmanfunctional;
+package Controller;
 
-import Render.GameRender;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

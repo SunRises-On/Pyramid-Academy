@@ -1,10 +1,10 @@
 package Hangman;
 
 import java.util.ArrayList;
-import Render.*;
+import Model.*;
 
 public class Game {
-    public GameRender gameRender;
+    public GameModel gameRender;
     private String gameGuess;
 
     public ArrayList<String> screen;
@@ -12,7 +12,7 @@ public class Game {
     public Word word;
     public Miss miss;
 
-    public Game(GameRender render){
+    public Game(GameModel render){
         gameRender = render;
         gameGuess = "";
         Scan scanFile = new Scan();
@@ -23,33 +23,42 @@ public class Game {
         screen = new ArrayList<>();
         miss = Miss.Zero;
         int letterNum = word.getStr().length();
-        play();
     }
 
-    public void play(){
-        //here we go
-        //1. make a guess
-        Character letter = ' ';
-        if(gameGuess!= ""){
-            //verify guess
-            //check if hit
-
-        }
-
-        gameGuess = "";
-        //check if game is over
-    }
-    //pubic void printHangman
-    // is replaced by miss
-  //  public Character getGuess(String verify){
-    //    Character c = ' ';
-        //validate string
-        //len to 0
-
-      //  return c;
-   // }
 
     public void setGameGuess(String gameGuess) {
         this.gameGuess = gameGuess;
+    }
+
+    public Boolean hitOrMiss( String str){
+        Boolean isHit = false;
+        Boolean isLetter = false;
+        Boolean isDuplicate = false;
+
+        isLetter = verifyStr(str);
+
+        if(isLetter){
+            //change to letter
+            String letter = str.substring(0,1);
+            //isHit =
+
+            //isDuplicate =
+
+            //if hit and duplicate, isHit = false
+            if(isHit && isDuplicate){
+                isHit = false;
+            }else{
+                //update word.addLetterHit()
+                word.addLetterHit(letter);
+                //update word.userView of hangman word
+            }
+        }
+
+
+        return isHit;
+    }
+    public Boolean verifyStr( String str){
+
+        return false;
     }
 }

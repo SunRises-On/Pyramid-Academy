@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hangmanfunctional.MenuController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MenuController">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" layoutX="196.0" layoutY="48.0" prefHeight="66.0" prefWidth="207.0" text="Hangman" AnchorPane.bottomAnchor="285.6" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="196.8" AnchorPane.topAnchor="48.0">
          <font>

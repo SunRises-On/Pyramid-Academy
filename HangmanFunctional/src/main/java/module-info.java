@@ -3,6 +3,6 @@ module com.example.hangmanfunctional {
     requires javafx.fxml;
 
 
-    opens com.example.hangmanfunctional to javafx.fxml;
-    exports com.example.hangmanfunctional;
+    opens Controller to javafx.fxml;
+    exports Controller;
 }
