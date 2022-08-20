@@ -45,6 +45,9 @@ public class Word {
 
         return false;
     }
+    public Boolean checkForBlank(){
+        return userView.contains(blank);
+    }
     public void addLetterHit( String s ){
         correctList.add(s);
     }

@@ -98,10 +98,10 @@ public class GameController {
         text.clear();
 
         //check if game is over
-       // isOver =  model.checkIsGameOver();
-        //won = model.getWonOrLost();
-        isOver= true;
-        won = true;
+        isOver =  model.checkIsGameOver();
+        won = model.getWonOrLost();
+        //isOver= true;
+        //won = true;
         if(isOver){
             if(won){
                 //special won message

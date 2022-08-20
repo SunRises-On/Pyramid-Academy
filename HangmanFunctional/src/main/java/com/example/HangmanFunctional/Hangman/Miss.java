@@ -13,6 +13,7 @@ public enum Miss {
 
     private static Miss[] vals = values();
     public final int value;
+    private final static int maxMissIndex = 5;
     private Miss(int value){
         this.value = value;
     }
@@ -24,4 +25,5 @@ public enum Miss {
     public Miss next(){
         return vals[(this.ordinal()+1)%vals.length];
     }
+    public int getMaxIndex(){ return maxMissIndex;}
 }

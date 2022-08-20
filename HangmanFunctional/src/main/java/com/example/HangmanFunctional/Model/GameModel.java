@@ -32,6 +32,12 @@ public class GameModel {
     public String getWord(){
         return game.getWord();
     }
+    public Boolean checkIsGameOver(){
+        return game.checkIsGameOver();
+    }
+    public Boolean getWonOrLost(){
+        return game.checkWon();
+    }
     //get player action(buttons)
     //update all
     //message(String s)

@@ -10,6 +10,7 @@ public class Game {
     public GameModel gameRender;
     public ArrayList<String> screen;
     public Boolean isDone;
+    public Boolean won;
     public Word word;
     public Miss miss;
 
@@ -74,6 +75,36 @@ public class Game {
     }
     public String getWord(){
         return word.userViewToString();
+    }
+
+    public Boolean checkIsGameOver(){
+        Boolean isMaxGuess = checkMaxMiss();
+        Boolean hasBlank = checkWordNotDone();
+        if(isMaxGuess){
+            isDone = true;
+            won = false;
+            return true;
+        }else{
+            if(!hasBlank){
+                isDone = true;
+                won = true;
+                return true;
+            }
+        }
+        return false;
+    }
+    public Boolean checkMaxMiss(){
+        int value = miss.value;
+        if(value == miss.getMaxIndex()){
+            return true;
+        }
+        return false;
+    }
+    public Boolean checkWordNotDone(){
+        return word.checkForBlank();
+    }
+    public Boolean checkWon(){
+        return won;
     }
 
 }
