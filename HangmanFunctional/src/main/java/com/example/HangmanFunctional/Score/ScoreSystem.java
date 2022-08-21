@@ -16,7 +16,7 @@ public class ScoreSystem {
         userScore = 100 - (10 * misses);
         String put = name + " "+ userScore;
 
-        int rank = file.getRank(userScore, name);
+        file.getRank(userScore, name);
 
 
     }

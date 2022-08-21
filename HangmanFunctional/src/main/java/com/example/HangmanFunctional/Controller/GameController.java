@@ -102,7 +102,7 @@ public class GameController {
 
         if(isOver){
             //sent signal to set score for 'name'
-            //model.setScore(name);
+            model.setScore(name);
             //retrieve boolean if user has high score
            // Boolean isBest = model.highScore(name);
             if(won){
