@@ -11,7 +11,7 @@
     <children>
         <ImageView fx:id="image" fitHeight="326.0" fitWidth="568.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@com/example/HangmanFunctional/Hangman_Basic.png" />
+                <Image url="@Hangman_Basic.png" />
             </image>
         </ImageView>
         <AnchorPane layoutX="312.0" layoutY="22.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">

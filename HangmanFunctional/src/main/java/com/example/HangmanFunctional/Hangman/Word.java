@@ -28,22 +28,11 @@ public class Word {
 
 
     }
-    public String getStr(){
-        return str;
-    }
-
     public Boolean checkForHit( String s ){
-        if(str.contains(s)){
-            return true;
-        }
-        return false;
+        return str.contains(s);
     }
     public Boolean checkForDuplicate(String s){
-        if(correctList.contains(s) || mistakeList.contains(s)){
-            return true;
-        }
-
-        return false;
+        return (correctList.contains(s) || mistakeList.contains(s));
     }
     public Boolean checkForBlank(){
         return userView.contains(blank);
@@ -60,8 +49,7 @@ public class Word {
       replace index with char
       **************************************/
     public void updateUserView( String s){
-        char l = s.charAt(0); /*convert to char*/
-        Character letter = l;
+        Character letter = s.charAt(0);
         int index = 0;
         for(Character c : wordArr){
             if(c == letter){
@@ -71,13 +59,17 @@ public class Word {
         }
     }
     public String userViewToString(){
-
+        int last = userView.size();
+        int index= 0;
         StringBuilder sb = new StringBuilder();
         for( Character ch : userView){
+            if(index > 0 && index < last){
+                sb.append(" ");
+            }
             sb.append(ch);
+            index++;
         }
-        String s = sb.toString();
-        return s;
+        return sb.toString();
     }
     public String getLastMiss(){
         return mistakeList.get( mistakeList.size()-1);

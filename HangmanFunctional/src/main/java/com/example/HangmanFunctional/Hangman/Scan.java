@@ -14,7 +14,7 @@ public class Scan {
         int random = -1;
         random = getRandom(random);
         try{
-            File text = new File("src/resource/Words.txt");
+            File text = new File("src/main/resources/Words.txt");
             Scanner scanner = new Scanner(text);
 
             int lineNumber = 1;
@@ -26,7 +26,6 @@ public class Scan {
         }catch( FileNotFoundException e){
             System.out.println("Hangman.Word.txt file not found");
         }
-
 
         return found;
     }

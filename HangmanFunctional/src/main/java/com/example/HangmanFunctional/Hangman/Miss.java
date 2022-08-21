@@ -11,10 +11,10 @@ public enum Miss {
     Five(4),
     Six(5);
 
-    private static Miss[] vals = values();
+    private final static Miss[] valArray = values();
     public final int value;
     private final static int maxMissIndex = 5;
-    private Miss(int value){
+    Miss(int value){
         this.value = value;
     }
     /**********************************************
@@ -23,7 +23,7 @@ public enum Miss {
      this.ordinal() = the position of the constant
      *********************************************/
     public Miss next(){
-        return vals[(this.ordinal()+1)%vals.length];
+        return valArray[(this.ordinal()+1)%valArray.length];
     }
     public int getMaxIndex(){ return maxMissIndex;}
 }

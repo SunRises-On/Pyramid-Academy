@@ -15,11 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class GameController {
-   // @FXML
-   // TextField text;
+
     @FXML
     Label label_One;
     @FXML
@@ -40,6 +38,7 @@ public class GameController {
     TextField text;
     ArrayList<Label> labels;
     ArrayList<String> locations;
+    String name;
     Boolean isOver;
     Boolean won;
     GameModel model;
@@ -100,9 +99,12 @@ public class GameController {
         //check if game is over
         isOver =  model.checkIsGameOver();
         won = model.getWonOrLost();
-        //isOver= true;
-        //won = true;
+
         if(isOver){
+            //sent signal to set score for 'name'
+            model.setScore(name);
+            //retrieve boolean if user has high score
+            Boolean isBest = model.highScore(name);
             if(won){
                 //special won message
                 Alert a = new Alert(Alert.AlertType.INFORMATION);

@@ -1,18 +1,15 @@
 package com.example.HangmanFunctional.Model;
 
-
 import com.example.HangmanFunctional.Hangman.Game;
-
-import java.io.IOException;
-import java.util.List;
+import com.example.HangmanFunctional.Score.ScoreSystem;
 
 public class GameModel {
 
     public Game game;
-
-    public GameModel( )throws IOException{
+    public ScoreSystem score;
+    public GameModel( ){
         game = new Game(this);
-
+        score = new ScoreSystem(this);
     }
     //get action hit or miss
     public Boolean[] getAction(String s){
@@ -38,6 +35,13 @@ public class GameModel {
     public Boolean getWonOrLost(){
         return game.checkWon();
     }
+    public int getMissNum(){
+        return game.missNum();
+    }
+    public void setScore(String n) {
+        int value = getMissNum();
+        score.calculateScore(value, n);
+    };
     //get player action(buttons)
     //update all
     //message(String s)

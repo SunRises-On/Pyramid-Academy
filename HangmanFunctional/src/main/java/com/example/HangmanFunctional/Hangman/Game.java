@@ -1,9 +1,6 @@
 package com.example.HangmanFunctional.Hangman;
 
 import java.util.ArrayList;
-import java.util.List;
-
-
 import com.example.HangmanFunctional.Model.GameModel;
 
 public class Game {
@@ -23,13 +20,12 @@ public class Game {
         word = new Word(str);
         screen = new ArrayList<>();
         miss = Miss.Zero;
-        int letterNum = word.getStr().length();
+
     }
 
     public Boolean[] hitOrMiss( String str){
-        Boolean isHit = false;
-        Boolean isLetter = false;
-        Boolean isDuplicate = false;
+        Boolean isHit, isLetter, isDuplicate;
+        isHit = isLetter = isDuplicate = false;
         Boolean[] hitAndDup = new Boolean[2];
 
         isLetter = verifyStr(str);
@@ -44,8 +40,7 @@ public class Game {
             System.out.println("Duplicate = "+isDuplicate);
             if(!isHit && !isDuplicate){
                 //update Enum miss
-                Miss newMiss = miss.next();
-                miss = newMiss;
+                miss = miss.next();
                 //update word.mistakeList
                 word.addLetterMiss(letter);
             }
@@ -95,16 +90,16 @@ public class Game {
     }
     public Boolean checkMaxMiss(){
         int value = miss.value;
-        if(value == miss.getMaxIndex()){
-            return true;
-        }
-        return false;
+        return value == miss.getMaxIndex();
     }
     public Boolean checkWordNotDone(){
         return word.checkForBlank();
     }
     public Boolean checkWon(){
         return won;
+    }
+    public int missNum(){
+        return miss.value+1;
     }
 
 }
