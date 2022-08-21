@@ -1,8 +1,12 @@
 package com.example.HangmanFunctional.Score;
 
+import com.example.HangmanFunctional.Hangman.Game;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class ScoreFile {
     private static final String filePath= "src/main/resources/Leaderboard.txt" ;
@@ -17,23 +21,52 @@ public class ScoreFile {
             save = readFile(save);
 
             if(save.isEmpty()){
-
                 userRank = 1;
-                GameSave gameSave = new GameSave(userScore, userName);
-
-                List<GameSave> newList = new ArrayList<>();
-                newList.add(gameSave);
-
-                save.put( userRank, newList );
+                save = setNewRank( userScore, userName, save, userRank);
             }
+            //put save into new hashmap of score and rank
+            // Create simple TreeMap of <rank, score> 
+            Iterator<Integer> keyIterator = save.keySet().iterator();
+
+            Map<Integer, Integer> smallSave =
+                    save.values().stream().flatMap(
+                            c->c.stream().map(d-> d.getScore()))
+                            .collect(Collectors.toMap(k->keyIterator.next(),
+                                    Function.identity(),
+                                    (l,r) -> l , TreeMap::new));
 
 
-              
-            //search gameSave for our score
-            //if found get
+
+            //if not empty add too it
+         /*   List<GameSave> newSave = save.values().stream()/* List<GameSave>> */
+                //    .flatMap( c -> c.stream()
+              //              .filter( GameSave -> GameSave.getScore() == userScore)
+            //        ).collect(Collectors.toList());
+            //get higher rank,  userScore > oldScore,
+          //  int higherRank = save.values().stream()
+        //            .flatMap( c -> c.stream()
+
+
+      //              ); */
+            //
+            //Get lower rank
+
 
         return -1;
     }
+
+    private Map<Integer, List<GameSave>> setNewRank (int score, String name, Map< Integer,List<GameSave> > save , int rank){
+
+        GameSave gameSave = new GameSave(score, name);
+        List<GameSave> list = new ArrayList<>();
+        list.add(gameSave);
+        save.put(rank, list);
+
+        return save;
+    }
+
+
+
 
     private  Map<Integer, List<GameSave>> readFile ( Map<Integer, List<GameSave>> save  ) throws NumberFormatException{
         try{
