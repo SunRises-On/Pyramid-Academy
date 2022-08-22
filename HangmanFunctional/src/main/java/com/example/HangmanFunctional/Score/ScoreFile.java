@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ScoreFile {
@@ -21,7 +22,7 @@ public class ScoreFile {
             Map<Integer, List<GameSave>> save = new TreeMap<>();
             int userRank = 0;
             save = readFile(save);
-            printToFile(save);
+            printFile(save);
             if(save.isEmpty()){
                 userRank = 1;
                 save = setNewRank( userScore, userName, save, userRank);
@@ -40,12 +41,18 @@ public class ScoreFile {
 
                 Iterator<Integer> valueIt = reverseValue.iterator();
                 TreeMap<Integer, Integer> smallSave = new TreeMap<>();
-                for( int i : reverseValue){
-                    smallSave.put( keyIterator.next(), valueIt.next());
-                }
-                for( Map.Entry<Integer, Integer> entry : smallSave.entrySet()){
-                    System.out.println("Rank = " + entry.getKey() +" Score = "+ entry.getValue());
-                }
+                smallSave = save.keySet().stream()
+                        .sorted().collect(Collectors.toMap
+                                (Function.identity(), v-> valueIt.next(),
+                                        (l,r) -> l
+                                ,TreeMap:: new)
+                        );
+                //smallSave = //
+               // for( int i : reverseValue){
+                    //    smallSave.put( keyIterator.next(), valueIt.next());
+              //  }
+                printSmallMap( smallSave);
+
                 int biggerRank = 0;
                 int smallerRank = 0;
                 boolean hasChanged = false;
@@ -69,14 +76,15 @@ public class ScoreFile {
                 }
                 if(!hasChanged){
                     //add too tail
-                    userRank = smallSave.get( smallSave.size()-1) + 1;
+                    //Fix incase of two....
+                    userRank = biggerRank+1;
                     save = setNewRank( userScore, userName, save, userRank );
                 }
 
             }
 
-            printToFile(save);
-            writeToFile(save);
+            printFile(save);
+            writeFile(save);
     }
     private Map<Integer, List<GameSave>> incrementRank( Map<Integer, List<GameSave>> save , int rank){
         Map<Integer, List<GameSave>> newMap = new TreeMap<>();
@@ -88,7 +96,7 @@ public class ScoreFile {
                 newMap.put( entry.getKey(), entry.getValue());
             }
         }
-        return save;
+        return newMap;
     }
 
     private Map<Integer, List<GameSave>> setNewRank (int score, String name, Map< Integer,List<GameSave> > save , int rank){
@@ -142,7 +150,7 @@ public class ScoreFile {
         return save;
     }
 
-    public void printToFile( Map<Integer, List<GameSave>> save){
+    public void printFile( Map<Integer, List<GameSave>> save){
         System.out.println("Here is the old set of scores");
         for(Map.Entry<Integer, List<GameSave>> entry  : save.entrySet() ){
             System.out.println("Rank " + entry.getKey());
@@ -153,18 +161,21 @@ public class ScoreFile {
         }
 
     }
-    public void writeToFile( Map<Integer, List<GameSave>> save) throws Exception{
+    public void writeFile( Map<Integer, List<GameSave>> save) throws Exception{
         File file = new File(filePath);
         BufferedWriter buffer = new BufferedWriter( new FileWriter(file));
         for(Map.Entry<Integer, List<GameSave>> entry : save.entrySet()){
             for( GameSave g : save.get(entry.getKey())){
-                String str = (entry.getKey() + " " +g.toString());
-                System.out.println(str);
                 buffer.write(entry.getKey() + " "+ g.toString() );
                 buffer.newLine();
 
             }
         }
         buffer.flush();
+    }
+    public void printSmallMap( Map<Integer, Integer> smallSave){
+        for( Map.Entry<Integer, Integer> entry : smallSave.entrySet()){
+            System.out.println("Rank = " + entry.getKey() +" Score = "+ entry.getValue());
+        }
     }
 }

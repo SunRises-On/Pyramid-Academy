@@ -1,6 +1,4 @@
-1 jenny 100
 1 user 100
-2 tommy 99
-3 user 90
-4 jared 80
-4 user 80
+2 user 90
+3 user 80
+3 user 80
