@@ -10,4 +10,8 @@ public class GameSave {
 
     public int getScore(){ return score; }
     public String getName(){ return name;}
+    @Override
+    public String toString(){
+        return name + " " +score;
+    }
 }

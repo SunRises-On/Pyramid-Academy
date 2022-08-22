@@ -1,4 +1,6 @@
 1 jenny 100
-2 phoney 99
-2 zebra 99
-3 jared 80
+1 user 100
+2 tommy 99
+3 user 90
+4 jared 80
+4 user 80

@@ -1,22 +1,27 @@
 package com.example.HangmanFunctional.Score;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ScoreFile {
     private static final String filePath= "src/main/resources/Leaderboard.txt" ;
 
-    protected void getRank (int userScore, String userName) throws NumberFormatException{
+    protected void getRank (int userScore, String userName) throws NumberFormatException, Exception{
 
             //Key = Rank,  Value = Player which has score and name
             Map<Integer, List<GameSave>> save = new TreeMap<>();
             int userRank = 0;
             save = readFile(save);
-            writeToFile(save);
+            printToFile(save);
             if(save.isEmpty()){
                 userRank = 1;
                 save = setNewRank( userScore, userName, save, userRank);
@@ -25,14 +30,22 @@ public class ScoreFile {
                 // Create simple TreeMap of <rank, score>
                 Iterator<Integer> keyIterator = save.keySet().iterator();
 
-                Map<Integer, Integer> smallSave =
-                    save.values().stream().flatMap(
-                            c->c.stream().map(d-> d.getScore()))
-                            .collect(Collectors.toMap(k->keyIterator.next(),
-                                    Function.identity(),
-                                    (l,r) -> l , TreeMap::new));
+                //Convert scores to treeset
+                Set<Integer> valueScore = save.values().stream().flatMap(
+                        c -> c.stream().map(GameSave::getScore)
+                ).collect(Collectors.toCollection(TreeSet::new));
 
+             //   TreeSet<Integer> valueReverse = (TreeSet<Integer>) ((TreeSet<Integer>) valueScore).descendingSet();
+                NavigableSet<Integer> reverseValue = ((TreeSet<Integer>) valueScore).descendingSet();
 
+                Iterator<Integer> valueIt = reverseValue.iterator();
+                TreeMap<Integer, Integer> smallSave = new TreeMap<>();
+                for( int i : reverseValue){
+                    smallSave.put( keyIterator.next(), valueIt.next());
+                }
+                for( Map.Entry<Integer, Integer> entry : smallSave.entrySet()){
+                    System.out.println("Rank = " + entry.getKey() +" Score = "+ entry.getValue());
+                }
                 int biggerRank = 0;
                 int smallerRank = 0;
                 boolean hasChanged = false;
@@ -62,6 +75,7 @@ public class ScoreFile {
 
             }
 
+            printToFile(save);
             writeToFile(save);
     }
     private Map<Integer, List<GameSave>> incrementRank( Map<Integer, List<GameSave>> save , int rank){
@@ -121,14 +135,14 @@ public class ScoreFile {
                 }
 
             }
-            scanner.close();
+            //scanner.close();
         }catch( FileNotFoundException e){
             System.out.println("Leaderboard.txt not found");
         }
         return save;
     }
 
-    public void writeToFile( Map<Integer, List<GameSave>> save){
+    public void printToFile( Map<Integer, List<GameSave>> save){
         System.out.println("Here is the old set of scores");
         for(Map.Entry<Integer, List<GameSave>> entry  : save.entrySet() ){
             System.out.println("Rank " + entry.getKey());
@@ -137,5 +151,20 @@ public class ScoreFile {
 
             }
         }
+
+    }
+    public void writeToFile( Map<Integer, List<GameSave>> save) throws Exception{
+        File file = new File(filePath);
+        BufferedWriter buffer = new BufferedWriter( new FileWriter(file));
+        for(Map.Entry<Integer, List<GameSave>> entry : save.entrySet()){
+            for( GameSave g : save.get(entry.getKey())){
+                String str = (entry.getKey() + " " +g.toString());
+                System.out.println(str);
+                buffer.write(entry.getKey() + " "+ g.toString() );
+                buffer.newLine();
+
+            }
+        }
+        buffer.flush();
     }
 }

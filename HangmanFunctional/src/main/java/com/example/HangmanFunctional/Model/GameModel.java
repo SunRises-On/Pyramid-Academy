@@ -38,7 +38,7 @@ public class GameModel {
     public int getMissNum(){
         return game.missNum();
     }
-    public void setScore(String n) {
+    public void setScore(String n) throws  Exception{
         int value = getMissNum();
         score.calculateScore(value, n);
     };

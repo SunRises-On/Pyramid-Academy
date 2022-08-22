@@ -38,7 +38,7 @@ public class GameController {
     TextField text;
     ArrayList<Label> labels;
     ArrayList<String> locations;
-    String name;
+    String name = "user";
     Boolean isOver;
     Boolean won;
     GameModel model;
@@ -77,7 +77,7 @@ public class GameController {
 
     }
     @FXML
-    public void getText(ActionEvent event)throws IOException{
+    public void getText(ActionEvent event)throws IOException, Exception{
         String guessC = text.getText();
 
         Boolean[] hitAndDup = new Boolean[2];

@@ -11,7 +11,7 @@ public class ScoreSystem {
         file = new ScoreFile();
     }
 
-    public void calculateScore ( int misses, String name ){
+    public void calculateScore ( int misses, String name ) throws  Exception{
         int userScore = 100;
         userScore = 100 - (10 * misses);
         String put = name + " "+ userScore;
@@ -20,6 +20,7 @@ public class ScoreSystem {
 
 
     }
+
     //get rank
     //get file position
     //sort file
