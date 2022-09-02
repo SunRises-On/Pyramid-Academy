@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-@ComponentScan(basePackages = "org.example")
 
 public class AppConfig {
 
@@ -17,6 +16,7 @@ public class AppConfig {
     public Address address(){
         return new Address("Houston","Texas","Harris","77001");
     }
+
     @Bean
     public Student student(){
         return new Student(1,"Jane Doe",ph() ,address());
