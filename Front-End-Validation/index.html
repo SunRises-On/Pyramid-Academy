@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+   <form action ="" onsubmit="return validateFirstName()" novalidate>
+        <label for="name">First Name: </label><br>
+        <input type="text"id="first-name"placeholder="first name"  /><br>
+        <div id="firstName-error" class="emsg"></div>
+   </form>
+   <form action="" onsubmit="return validateLastName()" novalidate>
+        <label for="name">Last Name: </label><br>
+        <input type="text"id="last-name"placeholder="last name" value=""/><br>
+        <div id="lastName-error" class="emsg"></div>
+   </form>
+   <form action="" onsubmit="return validateUsername()" novalidate>
+        <label for="name">Username: </label><br>
+        <input type="text"id="username"placeholder="username" value=""/><br>
+        <div id="username-error" class="emsg"></div>
+   </form>
+   <form action ="" onsubmit="return validatePassword()" novalidate>
+
+        <label for="name">Password: </label><br>
+        <input type="text"id="password"placeholder="password" value=""/><br>
+        <div id="password-error" class="emsg"></div>
+
+   </form>
+    <form action="" onsubmit="return validatePhoneNumber()" novalidate>
+        
+        <label for="phone-number">Phone Number: </label><br>
+        <input type="text"id="phone-number" placeholder="phone number" value=""/>
+        <div id="p-error" class="emsg"></div>
+
+    </form>
+    
+    <form action="" onsubmit="return validateEmailAddress()" novalidate>
+        
+        <label for="email">Email Address: </label><br>
+        <input type="text" id="email" placeholder="email" value=""/><br>
+        <div id="email-error" class="emsg"></div>
+
+    </form>
+    <form action="" onsubmit="return validatePostalCode()" novalidate>
+
+        <label for="postal-code">Postal Code: </label><br>
+        <input type="text" id="postal-code" placeholder="postal code" value=""/>
+        <div id="postal-error" class="emsg"></div>
+
+    </form>
+
+    <form>
+        <input type="submit"/>
+    </form>
+    <script src="js/main.js">
+    </script>
+</body>
+</html>
