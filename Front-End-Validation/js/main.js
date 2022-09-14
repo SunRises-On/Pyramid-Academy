@@ -127,6 +127,8 @@ function validateFirstName(){
             valid = true;
         }  
     }
+
+    
     
     return valid;
 }
