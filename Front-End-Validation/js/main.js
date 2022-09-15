@@ -30,15 +30,15 @@ function validatePhoneNumber(){
     }
     return valid;
 }
-function validatePostalCode(){
+function validatePostalCode(evt){
     var valid = true, error ="";
-    var field = document.getElementById("postal-code");
+    var field = document.getElementById("postal-code").value;
     error = document.getElementById("postal-error");
 
     var result = postalRGEX.test(field);
     if(result == false){
         field.classList.add("err");
-      //  error.innerHTML = "Postal Code is in the incorrect form";
+        error.innerHTML = "Postal Code is in the incorrect form";
         valid = false;
     }else{
         field.classList.remove("err");
@@ -47,7 +47,9 @@ function validatePostalCode(){
     return valid;
 }
 
+myFunction = validatePostalCode();
 function validateEmailAddress(){
+    e.preventDefault();
     var valid = true, error="";
     var field = document.getElementById("email");
     error = document.getElementById("email-error");

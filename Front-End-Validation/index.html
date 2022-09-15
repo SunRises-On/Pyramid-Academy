@@ -44,10 +44,10 @@
         <div id="email-error" class="emsg"></div>
 
     </form>
-    <form action="" onsubmit="return validatePostalCode()" novalidate>
+    <form action="" onsubmit="return myFunction()" novalidate>
 
         <label for="postal-code">Postal Code: </label><br>
-        <input type="text" id="postal-code" placeholder="postal code" value=""/>
+        <input type="text" id="postal-code" placeholder="postal code" onchange={validatePostalCode}/>
         <div id="postal-error" class="emsg"></div>
 
     </form>
