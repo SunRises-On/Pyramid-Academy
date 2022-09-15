@@ -9,3 +9,28 @@
   background-color: rgba(180, 89, 143, 0.286);
   color: #fff;
 }
+
+/* Now set the height of your Footer equal to the padding that you left for it in your #root.  To make it stay at the bottom, you will set it to be absolutely positioned.  If Main grows larger, your Footer will move down to remain at the bottom of the page. */ 
+.footer {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(197, 137, 176, 0.452);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.p{
+  font-family: Calibri;
+  font-size: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+}

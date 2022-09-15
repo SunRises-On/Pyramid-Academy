@@ -1,10 +1,11 @@
 import React from "react";
 import {Nav, Navbar, NavLink} from "react-bootstrap";
 import{ Link } from "react-router-dom";
+import "./App.css";
 
 const Navigationbar = () =>{
     return(
-        <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark">
+        <Navbar className="color-nav" collapseOnSelect expand="sm"variant="light">
             <Navbar.Toggle aria-controls="navbarScroll" data-bs-target="#navbarScroll"/>
             <Navbar.Collapse id="navbarScroll">
                 <Nav>
